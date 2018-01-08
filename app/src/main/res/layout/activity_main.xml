@@ -1,27 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.ecepfe.agilit.MainActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/helene"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/helenepicture"/>
-
-    <TextView
+    <ScrollView
         android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:id="@+id/zonededrop"
-        android:layout_below="@id/helenepicture"
-        android:layout_marginTop="100dp"
-        android:layout_marginStart="50dp"
-        android:background="#CCCCCC"/>
+        android:layout_height="match_parent"
+        android:id="@+id/zonedrop1"
+        android:background="@color/colorPrimaryDark">
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_des_taches1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="premiere classe"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/container1"
+                android:background="@color/colorgris"
+                android:layout_margin="4dp">
+
+                <ImageView
+                    android:id="@+id/helenepicturecontainer"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/helene"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/contenertext1"
+                    android:layout_toRightOf="@id/helenepicturecontainer"
+                    android:ellipsize="end"
+                    android:maxLines="5"
+                    android:text="Nous marquon ici le premier texte qui sera affichage via le click dessus dans une magnifique popup"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/container2"
+                android:background="@color/colorgris"
+                android:layout_margin="4dp">
+
+                <ImageView
+                    android:id="@+id/midaspicturecontainer"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/midas"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/contenertext2"
+                    android:layout_toRightOf="@id/midaspicturecontainer"
+                    android:ellipsize="end"
+                    android:maxLines="5"
+                    android:text="I need to get reference to separate XML file wich is FrameLayout but I can't figure out how to do it ,this code doesn't work: "/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/container3"
+                android:background="@color/colorgris"
+                android:layout_margin="4dp">
+
+                <ImageView
+                    android:id="@+id/heliospicturecontainer"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/helios"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/contenertext3"
+                    android:layout_toRightOf="@id/heliospicturecontainer"
+                    android:ellipsize="end"
+                    android:maxLines="5"
+                    android:text="Using RelativeLayout, you can align two elements by right border, or make one below another, centered in the screen, centered left, and so on. By default, all child views are drawn at the top-left of the layout, so you must define the position of each view using the various layout properties available from"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/container4"
+                android:background="@color/colorgris"
+                android:layout_margin="4dp">
+
+                <ImageView
+                    android:id="@+id/panpicturecontainer"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/pan"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/contenertext4"
+                    android:layout_toRightOf="@id/panpicturecontainer"
+                    android:ellipsize="end"
+                    android:maxLines="5"
+                    android:text="Makes the bottom edge of this view match the bottom edge of the given anchor view ID and must be a reference to another resource, in the form "/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/container5"
+                android:background="@color/colorgris"
+                android:layout_margin="4dp">
+
+                <ImageView
+                    android:id="@+id/hermespicturecontainer"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/hermes"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/contenertext5"
+                    android:layout_toRightOf="@id/hermespicturecontainer"
+                    android:ellipsize="end"
+                    android:maxLines="5"
+                    android:text="This example will take you through simple steps to show how to create your own Android application using Relative Layout. Follow the following steps to modify the Android application we created in Hello World Example chapter"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/container6"
+                android:background="@color/colorgris"
+                android:layout_margin="4dp">
+
+                <ImageView
+                    android:id="@+id/poseidonpicturecontainer"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/poseidon"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/contenertext6"
+                    android:layout_toRightOf="@id/poseidonpicturecontainer"
+                    android:ellipsize="end"
+                    android:maxLines="5"
+                    android:text="Let's try to run our modified Hello World! application we just modified. I assume you had created your AVD while doing environment setup. To run the app from Android Studio, open one of your project's activity"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ScrollView
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:id="@+id/zonedrop2"
+        android:background="@color/colorAccent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/list_des_taches2"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="deuxieme classe"/>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <ScrollView
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:id="@+id/zonedrop3"
+        android:background="@color/color3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_des_taches3"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="troisieme classe"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
