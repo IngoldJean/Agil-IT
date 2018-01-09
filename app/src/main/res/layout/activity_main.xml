@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
+    android:id="@+id/fullscreen"
     android:layout_height="match_parent">
 
     <ScrollView
@@ -17,8 +18,10 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="premiere classe"/>
+                android:layout_height="30dp"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:text="To-do"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -29,8 +32,9 @@
 
                 <ImageView
                     android:id="@+id/helenepicturecontainer"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:tag="user1pic"
                     android:src="@drawable/helene"/>
 
                 <TextView
@@ -40,7 +44,7 @@
                     android:layout_toRightOf="@id/helenepicturecontainer"
                     android:ellipsize="end"
                     android:maxLines="5"
-                    android:text="Nous marquon ici le premier texte qui sera affichage via le click dessus dans une magnifique popup"/>
+                    android:text="Nous marquons ici le premier texte qui sera affichage via le click dessus dans une magnifique popup"/>
 
             </RelativeLayout>
 
@@ -53,8 +57,9 @@
 
                 <ImageView
                     android:id="@+id/midaspicturecontainer"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:tag="user6pic"
                     android:src="@drawable/midas"/>
 
                 <TextView
@@ -77,8 +82,9 @@
 
                 <ImageView
                     android:id="@+id/heliospicturecontainer"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:tag="user2pic"
                     android:src="@drawable/helios"/>
 
                 <TextView
@@ -101,8 +107,9 @@
 
                 <ImageView
                     android:id="@+id/panpicturecontainer"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:tag="user5pic"
                     android:src="@drawable/pan"/>
 
                 <TextView
@@ -125,8 +132,9 @@
 
                 <ImageView
                     android:id="@+id/hermespicturecontainer"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:tag="user3pic"
                     android:src="@drawable/hermes"/>
 
                 <TextView
@@ -149,8 +157,9 @@
 
                 <ImageView
                     android:id="@+id/poseidonpicturecontainer"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:tag="user4pic"
                     android:src="@drawable/poseidon"/>
 
                 <TextView
@@ -182,16 +191,17 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="deuxieme classe"/>
+                android:layout_height="30dp"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:text="In progress"/>
 
         </LinearLayout>
-
 
     </ScrollView>
 
     <ScrollView
-        android:layout_width="250dp"
+        android:layout_width="200dp"
         android:layout_height="match_parent"
         android:id="@+id/zonedrop3"
         android:background="@color/color3">
@@ -204,8 +214,82 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="troisieme classe"/>
+                android:layout_height="30dp"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:text="Done"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/personnage"
+        android:background="@color/color3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_des_perso"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/boutonassign"
+                android:text="Assignation"
+                android:onClick="launchActiviteAssign"/>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/picutilisateur1"
+                android:layout_margin="2dp"
+                android:tag="user1pic"
+                android:src="@drawable/helene"/>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/picutilisateur2"
+                android:layout_margin="2dp"
+                android:tag="user2pic"
+                android:src="@drawable/helios"/>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/picutilisateur3"
+                android:layout_margin="2dp"
+                android:tag="user3pic"
+                android:src="@drawable/hermes"/>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/picutilisateur4"
+                android:layout_margin="2dp"
+                android:tag="user4pic"
+                android:src="@drawable/poseidon"/>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/picutilisateur5"
+                android:layout_margin="2dp"
+                android:tag="user5pic"
+                android:src="@drawable/pan"/>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/picutilisateur6"
+                android:layout_margin="2dp"
+                android:tag="user6pic"
+                android:src="@drawable/midas"/>
 
         </LinearLayout>
 
