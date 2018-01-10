@@ -14,6 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -22,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout linearLayoutTest, linearLayoutTest2, utilisateursList;
     ScrollView scrollViewTest;
     TextView textcont1, textcont2, textcont3, textcont4, textcont5, textcont6, texttemp;
-    ImageView picutilisateur1, picutilisateur2, picutilisateur3, picutilisateur4, picutilisateur5, picutilisateur6, imageViewtemp;
+    ImageView picutilisateur1, picutilisateur2, picutilisateur3, picutilisateur4, picutilisateur5, picutilisateur6, imageViewtemp, imageViewtemp2, imageViewtemp3;
     RelativeLayout container1, container2, container3, container4, container5, container6, containertemp, containertemp2;
     Button mButton;
 
@@ -61,26 +64,26 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        container1.setOnLongClickListener(longClickListener);
-        container2.setOnLongClickListener(longClickListener);
-        container3.setOnLongClickListener(longClickListener);
-        container4.setOnLongClickListener(longClickListener);
-        container5.setOnLongClickListener(longClickListener);
-        container6.setOnLongClickListener(longClickListener);
+        container1.setOnLongClickListener(containerLongClickListener);
+        container2.setOnLongClickListener(containerLongClickListener);
+        container3.setOnLongClickListener(containerLongClickListener);
+        container4.setOnLongClickListener(containerLongClickListener);
+        container5.setOnLongClickListener(containerLongClickListener);
+        container6.setOnLongClickListener(containerLongClickListener);
 
-        container1.setOnClickListener(affichagepopup2);
-        container2.setOnClickListener(affichagepopup2);
-        container3.setOnClickListener(affichagepopup2);
-        container4.setOnClickListener(affichagepopup2);
-        container5.setOnClickListener(affichagepopup2);
-        container6.setOnClickListener(affichagepopup2);
+        container1.setOnClickListener(affichagepopupdisplaycontent);
+        container2.setOnClickListener(affichagepopupdisplaycontent);
+        container3.setOnClickListener(affichagepopupdisplaycontent);
+        container4.setOnClickListener(affichagepopupdisplaycontent);
+        container5.setOnClickListener(affichagepopupdisplaycontent);
+        container6.setOnClickListener(affichagepopupdisplaycontent);
 
-        picutilisateur1.setOnLongClickListener(longClickListenerUtilisateur);
-        picutilisateur2.setOnLongClickListener(longClickListenerUtilisateur);
-        picutilisateur3.setOnLongClickListener(longClickListenerUtilisateur);
-        picutilisateur4.setOnLongClickListener(longClickListenerUtilisateur);
-        picutilisateur5.setOnLongClickListener(longClickListenerUtilisateur);
-        picutilisateur6.setOnLongClickListener(longClickListenerUtilisateur);
+        picutilisateur1.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
+        picutilisateur2.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
+        picutilisateur3.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
+        picutilisateur4.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
+        picutilisateur5.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
+        picutilisateur6.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
 
         zonededrop1.setOnDragListener(onDragListener);
         zonededrop2.setOnDragListener(onDragListener);
@@ -89,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    View.OnClickListener affichagepopup2 = new View.OnClickListener() {
+    View.OnClickListener affichagepopupdisplaycontent = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
@@ -115,28 +118,39 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-    View.OnLongClickListener longClickListener = new View.OnLongClickListener() {
+    View.OnLongClickListener containerLongClickListener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
             ClipData clipData = ClipData.newPlainText("", "");
             View.DragShadowBuilder dragShadowBuilder = new View.DragShadowBuilder(v);
             v.startDrag(clipData, dragShadowBuilder, v, 0);
-            v.setVisibility(View.INVISIBLE);
+            v.setVisibility(View.GONE);
             return true;
         }
     };
 
-    View.OnLongClickListener longClickListenerUtilisateur = new View.OnLongClickListener() {
+    View.OnLongClickListener assigneUtilisateur = new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+            ClipData clipData = ClipData.newPlainText("", "");
+            View.DragShadowBuilder dragShadowBuilder = new View.DragShadowBuilder(v);
+            v.startDrag(clipData, dragShadowBuilder, v, 0);
+            return true;
+        }
+    };
+
+    View.OnLongClickListener DisplaylongClickListenerUtilisateur = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
 
             utilisateursList = (LinearLayout) findViewById(R.id.list_des_perso);
             for(int inde=0; inde<(utilisateursList).getChildCount(); ++inde) {
-                View img = (utilisateursList).getChildAt(inde);
-                imageViewtemp = (ImageView) img;
-                imageViewtemp.setImageAlpha(128);
+                View nextChil = (utilisateursList).getChildAt(inde);
+                if (nextChil instanceof ImageView) {
+                    imageViewtemp = (ImageView) nextChil;
+                    imageViewtemp.setImageAlpha(128);
+                }
             }
-
 
             imageViewtemp = (ImageView) findViewById(v.getId());
             imageViewtemp.setImageAlpha(255);
@@ -146,31 +160,26 @@ public class MainActivity extends AppCompatActivity {
             for(int index=0; index<(linearLayoutTest).getChildCount(); ++index) {
                 View nextChild = (linearLayoutTest).getChildAt(index);
                 if (nextChild instanceof ScrollView) {
-                    Log.i("cherche", "Scrollview");
 
                     scrollViewTest = (ScrollView) findViewById(nextChild.getId());
                     for(int index2=0; index2<(scrollViewTest).getChildCount(); ++index2) {
                         View nextChild2 = (scrollViewTest).getChildAt(index2);
                         if (nextChild2 instanceof LinearLayout) {
-                            Log.i("cherche", "LinearLayout");
 
                             linearLayoutTest2 = (LinearLayout) findViewById(nextChild2.getId());
                             for(int index3=0; index3<(linearLayoutTest2).getChildCount(); ++index3) {
                                 View nextChild3 = (linearLayoutTest2).getChildAt(index3);
                                 if (nextChild3 instanceof RelativeLayout) {
-                                    Log.i("cherche", "RelativeLayout");
 
                                     containertemp = (RelativeLayout) findViewById(nextChild3.getId());
                                     containertemp.setAlpha(0.5F);
                                     for(int index4=0; index4<(containertemp).getChildCount(); ++index4) {
                                         View nextChild4 = (containertemp).getChildAt(index4);
                                         if (nextChild4 instanceof ImageView) {
-                                            Log.i("cherche", "ImageView");
 
                                             ImageView imageViewtemp2 = (ImageView) findViewById(nextChild4.getId());
 
                                             if (imageViewtemp2.getTag() == imageViewtemp.getTag()){
-                                                Log.i("trouve", "conclue");
                                                 containertemp.setAlpha(1F);
                                             }
                                         }
@@ -199,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
             switch (dragevent){
                 case DragEvent.ACTION_DRAG_STARTED:
                     //imagetemp.setVisibility(View.INVISIBLE);
-                    containertemp.setVisibility(View.INVISIBLE);
+                    containertemp.setVisibility(View.GONE);
 
                 case DragEvent.ACTION_DRAG_ENTERED:
                     break;
@@ -241,6 +250,66 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+
+    View.OnDragListener onDragListenerUserPic = new View.OnDragListener(){
+        @Override
+        public boolean onDrag(View v, DragEvent event) {
+            int dragevent=event.getAction();
+
+            final View view = (View) event.getLocalState();
+
+            imageViewtemp = (ImageView) findViewById(view.getId());
+
+            switch (dragevent){
+                case DragEvent.ACTION_DRAG_STARTED:
+
+                case DragEvent.ACTION_DRAG_ENTERED:
+                    break;
+
+                case DragEvent.ACTION_DROP:
+
+                    int ender = 0;
+                    int dejavu = 0;
+                    containertemp = (RelativeLayout) findViewById(v.getId());
+
+                    for(int index=0; index<(containertemp).getChildCount(); ++index) {
+                        View nextChild = (containertemp).getChildAt(index);
+                        if(nextChild.getTag() != imageViewtemp.getTag()) {
+                            if (nextChild instanceof ImageView) {
+                                if (Objects.equals(String.valueOf(nextChild.getTag()), "unused") && ender == 0) {
+
+                                    for(int indexx=0; indexx<(containertemp).getChildCount(); ++indexx) {
+                                        View nextChildx = (containertemp).getChildAt(indexx);
+                                        if (nextChildx instanceof ImageView) {
+                                            imageViewtemp3 = (ImageView) findViewById(nextChildx.getId());
+                                            if (nextChildx.getTag() == imageViewtemp.getTag()) {
+                                                dejavu = 1;
+                                                Toast.makeText(MainActivity.this,"Utilisateur déjà assigné à cette tâche",
+                                                        Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                    }
+
+                                    if(dejavu == 0){
+                                        imageViewtemp2 = (ImageView) findViewById(nextChild.getId());
+                                        imageViewtemp2.setVisibility(View.VISIBLE);
+                                        imageViewtemp2.setImageDrawable(imageViewtemp.getDrawable());
+                                        imageViewtemp2.setTag(imageViewtemp.getTag());
+                                        ender = 1;
+                                    }
+                                    dejavu=0;
+                                }
+                            }
+                        }
+                    }
+                    break;
+
+            }
+            return true;
+        }
+    };
+
+
     public void launchActiviteAssign(View view) {
 
         mButton = (Button) findViewById(R.id.boutonassign);
@@ -249,6 +318,7 @@ public class MainActivity extends AppCompatActivity {
             zonededrop1.setOnDragListener(null);
             zonededrop2.setOnDragListener(null);
             zonededrop3.setOnDragListener(null);
+
             container1.setOnLongClickListener(null);
             container2.setOnLongClickListener(null);
             container3.setOnLongClickListener(null);
@@ -256,19 +326,83 @@ public class MainActivity extends AppCompatActivity {
             container5.setOnLongClickListener(null);
             container6.setOnLongClickListener(null);
 
+            container1.setOnDragListener(onDragListenerUserPic);
+            container2.setOnDragListener(onDragListenerUserPic);
+            container3.setOnDragListener(onDragListenerUserPic);
+            container4.setOnDragListener(onDragListenerUserPic);
+            container5.setOnDragListener(onDragListenerUserPic);
+            container6.setOnDragListener(onDragListenerUserPic);
+
+            picutilisateur1.setOnLongClickListener(assigneUtilisateur);
+            picutilisateur2.setOnLongClickListener(assigneUtilisateur);
+            picutilisateur3.setOnLongClickListener(assigneUtilisateur);
+            picutilisateur4.setOnLongClickListener(assigneUtilisateur);
+            picutilisateur5.setOnLongClickListener(assigneUtilisateur);
+            picutilisateur6.setOnLongClickListener(assigneUtilisateur);
+
+            utilisateursList = (LinearLayout) findViewById(R.id.list_des_perso);
+            for(int inde=0; inde<(utilisateursList).getChildCount(); ++inde) {
+                View nextChil = (utilisateursList).getChildAt(inde);
+                if (nextChil instanceof ImageView) {
+                    imageViewtemp = (ImageView) nextChil;
+                    imageViewtemp.setImageAlpha(255);
+                }
+            }
+
+            linearLayoutTest = (LinearLayout) findViewById(R.id.fullscreen);
+
+            for(int index=0; index<(linearLayoutTest).getChildCount(); ++index) {
+                View nextChild = (linearLayoutTest).getChildAt(index);
+                if (nextChild instanceof ScrollView) {
+
+                    scrollViewTest = (ScrollView) findViewById(nextChild.getId());
+                    for(int index2=0; index2<(scrollViewTest).getChildCount(); ++index2) {
+                        View nextChild2 = (scrollViewTest).getChildAt(index2);
+                        if (nextChild2 instanceof LinearLayout) {
+
+                            linearLayoutTest2 = (LinearLayout) findViewById(nextChild2.getId());
+                            for(int index3=0; index3<(linearLayoutTest2).getChildCount(); ++index3) {
+                                View nextChild3 = (linearLayoutTest2).getChildAt(index3);
+                                if (nextChild3 instanceof RelativeLayout) {
+
+                                    containertemp = (RelativeLayout) findViewById(nextChild3.getId());
+                                    containertemp.setAlpha(1F);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             mButton.setText("Déplacement");
             Toggle = 0;
         }else {
             if (Toggle == 0) {
+
+                container1.setOnDragListener(null);
+                container2.setOnDragListener(null);
+                container3.setOnDragListener(null);
+                container4.setOnDragListener(null);
+                container5.setOnDragListener(null);
+                container6.setOnDragListener(null);
+
+                picutilisateur1.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
+                picutilisateur2.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
+                picutilisateur3.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
+                picutilisateur4.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
+                picutilisateur5.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
+                picutilisateur6.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
+
+                container1.setOnLongClickListener(containerLongClickListener);
+                container2.setOnLongClickListener(containerLongClickListener);
+                container3.setOnLongClickListener(containerLongClickListener);
+                container4.setOnLongClickListener(containerLongClickListener);
+                container5.setOnLongClickListener(containerLongClickListener);
+                container6.setOnLongClickListener(containerLongClickListener);
+
                 zonededrop1.setOnDragListener(onDragListener);
                 zonededrop2.setOnDragListener(onDragListener);
                 zonededrop3.setOnDragListener(onDragListener);
-                container1.setOnLongClickListener(longClickListener);
-                container2.setOnLongClickListener(longClickListener);
-                container3.setOnLongClickListener(longClickListener);
-                container4.setOnLongClickListener(longClickListener);
-                container5.setOnLongClickListener(longClickListener);
-                container6.setOnLongClickListener(longClickListener);
 
                 mButton.setText("Assignation");
                 Toggle = 1;

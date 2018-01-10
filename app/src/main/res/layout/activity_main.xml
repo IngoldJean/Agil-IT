@@ -37,6 +37,22 @@
                     android:tag="user1pic"
                     android:src="@drawable/helene"/>
 
+                <ImageView
+                    android:id="@+id/unused11"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:visibility="gone"
+                    android:layout_below="@id/helenepicturecontainer"
+                    android:tag="unused"/>
+
+                <ImageView
+                    android:id="@+id/unused12"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:visibility="gone"
+                    android:layout_below="@id/unused11"
+                    android:tag="unused"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -61,6 +77,22 @@
                     android:layout_height="20dp"
                     android:tag="user6pic"
                     android:src="@drawable/midas"/>
+
+                <ImageView
+                    android:id="@+id/unused21"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:visibility="gone"
+                    android:layout_below="@id/midaspicturecontainer"
+                    android:tag="unused"/>
+
+                <ImageView
+                    android:id="@+id/unused22"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:visibility="gone"
+                    android:layout_below="@id/unused21"
+                    android:tag="unused"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -87,6 +119,22 @@
                     android:tag="user2pic"
                     android:src="@drawable/helios"/>
 
+                <ImageView
+                    android:id="@+id/unused31"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:visibility="gone"
+                    android:layout_below="@id/heliospicturecontainer"
+                    android:tag="unused"/>
+
+                <ImageView
+                    android:id="@+id/unused32"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:visibility="gone"
+                    android:layout_below="@id/unused31"
+                    android:tag="unused"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -111,6 +159,22 @@
                     android:layout_height="20dp"
                     android:tag="user5pic"
                     android:src="@drawable/pan"/>
+
+                <ImageView
+                    android:id="@+id/unused41"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:visibility="gone"
+                    android:layout_below="@id/panpicturecontainer"
+                    android:tag="unused"/>
+
+                <ImageView
+                    android:id="@+id/unused42"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:visibility="gone"
+                    android:layout_below="@id/unused41"
+                    android:tag="unused"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -137,6 +201,22 @@
                     android:tag="user3pic"
                     android:src="@drawable/hermes"/>
 
+                <ImageView
+                    android:id="@+id/unused51"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:visibility="gone"
+                    android:layout_below="@id/hermespicturecontainer"
+                    android:tag="unused"/>
+
+                <ImageView
+                    android:id="@+id/unused52"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:visibility="gone"
+                    android:layout_below="@id/unused51"
+                    android:tag="unused"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -161,6 +241,22 @@
                     android:layout_height="20dp"
                     android:tag="user4pic"
                     android:src="@drawable/poseidon"/>
+
+                <ImageView
+                    android:id="@+id/unused61"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:visibility="gone"
+                    android:layout_below="@id/poseidonpicturecontainer"
+                    android:tag="unused"/>
+
+                <ImageView
+                    android:id="@+id/unused62"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:visibility="gone"
+                    android:layout_below="@id/unused51"
+                    android:tag="unused"/>
 
                 <TextView
                     android:layout_width="match_parent"
