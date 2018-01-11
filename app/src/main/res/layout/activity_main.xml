@@ -31,18 +31,18 @@
                 android:layout_margin="4dp">
 
                 <ImageView
-                    android:id="@+id/helenepicturecontainer"
+                    android:id="@+id/unused10"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:tag="user1pic"
-                    android:src="@drawable/helene"/>
+                    android:visibility="gone"
+                    android:tag="unused" />
 
                 <ImageView
                     android:id="@+id/unused11"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:visibility="gone"
-                    android:layout_below="@id/helenepicturecontainer"
+                    android:layout_below="@id/unused10"
                     android:tag="unused"/>
 
                 <ImageView
@@ -57,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/contenertext1"
-                    android:layout_toRightOf="@id/helenepicturecontainer"
+                    android:layout_toRightOf="@id/unused10"
                     android:ellipsize="end"
                     android:maxLines="5"
                     android:text="Nous marquons ici le premier texte qui sera affichage via le click dessus dans une magnifique popup"/>
@@ -72,18 +72,18 @@
                 android:layout_margin="4dp">
 
                 <ImageView
-                    android:id="@+id/midaspicturecontainer"
+                    android:id="@+id/unused20"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:tag="user6pic"
-                    android:src="@drawable/midas"/>
+                    android:visibility="gone"
+                    android:tag="unused" />
 
                 <ImageView
                     android:id="@+id/unused21"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:visibility="gone"
-                    android:layout_below="@id/midaspicturecontainer"
+                    android:layout_below="@id/unused20"
                     android:tag="unused"/>
 
                 <ImageView
@@ -98,7 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/contenertext2"
-                    android:layout_toRightOf="@id/midaspicturecontainer"
+                    android:layout_toRightOf="@id/unused20"
                     android:ellipsize="end"
                     android:maxLines="5"
                     android:text="I need to get reference to separate XML file wich is FrameLayout but I can't figure out how to do it ,this code doesn't work: "/>
@@ -113,18 +113,18 @@
                 android:layout_margin="4dp">
 
                 <ImageView
-                    android:id="@+id/heliospicturecontainer"
+                    android:id="@+id/unused30"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:tag="user2pic"
-                    android:src="@drawable/helios"/>
+                    android:visibility="gone"
+                    android:tag="unused" />
 
                 <ImageView
                     android:id="@+id/unused31"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:visibility="gone"
-                    android:layout_below="@id/heliospicturecontainer"
+                    android:layout_below="@id/unused30"
                     android:tag="unused"/>
 
                 <ImageView
@@ -139,7 +139,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/contenertext3"
-                    android:layout_toRightOf="@id/heliospicturecontainer"
+                    android:layout_toRightOf="@id/unused30"
                     android:ellipsize="end"
                     android:maxLines="5"
                     android:text="Using RelativeLayout, you can align two elements by right border, or make one below another, centered in the screen, centered left, and so on. By default, all child views are drawn at the top-left of the layout, so you must define the position of each view using the various layout properties available from"/>
@@ -154,18 +154,18 @@
                 android:layout_margin="4dp">
 
                 <ImageView
-                    android:id="@+id/panpicturecontainer"
+                    android:id="@+id/unused40"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:tag="user5pic"
-                    android:src="@drawable/pan"/>
+                    android:visibility="gone"
+                    android:tag="unused" />
 
                 <ImageView
                     android:id="@+id/unused41"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:visibility="gone"
-                    android:layout_below="@id/panpicturecontainer"
+                    android:layout_below="@id/unused40"
                     android:tag="unused"/>
 
                 <ImageView
@@ -180,7 +180,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/contenertext4"
-                    android:layout_toRightOf="@id/panpicturecontainer"
+                    android:layout_toRightOf="@id/unused40"
                     android:ellipsize="end"
                     android:maxLines="5"
                     android:text="Makes the bottom edge of this view match the bottom edge of the given anchor view ID and must be a reference to another resource, in the form "/>
@@ -195,18 +195,18 @@
                 android:layout_margin="4dp">
 
                 <ImageView
-                    android:id="@+id/hermespicturecontainer"
+                    android:id="@+id/unused50"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:tag="user3pic"
-                    android:src="@drawable/hermes"/>
+                    android:visibility="gone"
+                    android:tag="unused" />
 
                 <ImageView
                     android:id="@+id/unused51"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:visibility="gone"
-                    android:layout_below="@id/hermespicturecontainer"
+                    android:layout_below="@id/unused50"
                     android:tag="unused"/>
 
                 <ImageView
@@ -221,7 +221,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/contenertext5"
-                    android:layout_toRightOf="@id/hermespicturecontainer"
+                    android:layout_toRightOf="@id/unused50"
                     android:ellipsize="end"
                     android:maxLines="5"
                     android:text="This example will take you through simple steps to show how to create your own Android application using Relative Layout. Follow the following steps to modify the Android application we created in Hello World Example chapter"/>
@@ -236,18 +236,18 @@
                 android:layout_margin="4dp">
 
                 <ImageView
-                    android:id="@+id/poseidonpicturecontainer"
+                    android:id="@+id/unused60"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:tag="user4pic"
-                    android:src="@drawable/poseidon"/>
+                    android:visibility="gone"
+                    android:tag="unused" />
 
                 <ImageView
                     android:id="@+id/unused61"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:visibility="gone"
-                    android:layout_below="@id/poseidonpicturecontainer"
+                    android:layout_below="@id/unused60"
                     android:tag="unused"/>
 
                 <ImageView
@@ -255,14 +255,14 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:visibility="gone"
-                    android:layout_below="@id/unused51"
+                    android:layout_below="@id/unused61"
                     android:tag="unused"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/contenertext6"
-                    android:layout_toRightOf="@id/poseidonpicturecontainer"
+                    android:layout_toRightOf="@id/unused60"
                     android:ellipsize="end"
                     android:maxLines="5"
                     android:text="Let's try to run our modified Hello World! application we just modified. I assume you had created your AVD while doing environment setup. To run the app from Android Studio, open one of your project's activity"/>

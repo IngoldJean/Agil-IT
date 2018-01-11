@@ -9,6 +9,7 @@ import android.view.DragEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -16,18 +17,23 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    ScrollView zonededrop1, zonededrop2, zonededrop3;
+    ScrollView zonededrop1, zonededrop2, zonededrop3, scrollViewTest;
     LinearLayout linearLayoutTest, linearLayoutTest2, utilisateursList;
-    ScrollView scrollViewTest;
     TextView textcont1, textcont2, textcont3, textcont4, textcont5, textcont6, texttemp;
     ImageView picutilisateur1, picutilisateur2, picutilisateur3, picutilisateur4, picutilisateur5, picutilisateur6, imageViewtemp, imageViewtemp2, imageViewtemp3;
-    RelativeLayout container1, container2, container3, container4, container5, container6, containertemp, containertemp2;
+    RelativeLayout container1, container2, container3, container4, container5, container6, containertemp, containertemp2, containertemppopup;
     Button mButton;
+    //List<String> myimagetag = new ArrayList<String>();
 
     Integer Toggle = 1;
 
@@ -97,9 +103,11 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             AlertDialog.Builder mbuilder = new AlertDialog.Builder(MainActivity.this);
-            View mView = getLayoutInflater().inflate(R.layout.tachedeataille, null);
+            final View mView = getLayoutInflater().inflate(R.layout.tachedeataille, null);
 
             containertemp2 = (RelativeLayout) findViewById(v.getId());
+            containertemppopup = (RelativeLayout) findViewById(v.getId());
+
 
             for(int index=0; index<(containertemp2).getChildCount(); ++index) {
                 View nextChild = (containertemp2).getChildAt(index);
@@ -108,12 +116,72 @@ public class MainActivity extends AppCompatActivity {
                     texttemp = (TextView) findViewById(nextChild.getId());
                     TextView textView = (TextView) mView.findViewById(R.id.popuptextdetaille);
                     textView.setText(texttemp.getText());
+
+                    Global.dernierIDpopup=nextChild.getId();
+
+                    final Button mButton = (Button) mView.findViewById(R.id.buttoncorrection);
+                    final Button mButton2 = (Button) mView.findViewById(R.id.validationcorrection);
+
+                    mButton.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v) {
+                            TextView mText = (TextView) mView.findViewById(R.id.popuptextdetaille);
+                            mText.setVisibility(View.GONE);
+
+                            EditText mEdit = (EditText) mView.findViewById(R.id.tachecorrigee);
+                            mEdit.setText(mText.getText());
+
+                            mEdit.setVisibility(View.VISIBLE);
+
+                            mButton2.setVisibility(View.VISIBLE);
+                        }
+                    });
+
+                    mButton2.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v) {
+                            EditText mEdit = (EditText) mView.findViewById(R.id.tachecorrigee);
+                            TextView mText = (TextView) mView.findViewById(R.id.popuptextdetaille);
+
+                            mText.setText(mEdit.getText());
+
+                            mEdit.setVisibility(View.GONE);
+                            mText.setVisibility(View.VISIBLE);
+
+                            TextView texttache = (TextView) findViewById(Global.dernierIDpopup);
+                            texttache.setText(mText.getText());
+
+                            mButton2.setVisibility(View.GONE);
+                        }
+                    });
+
+                    /*for(int index2=0; index2<(containertemppopup).getChildCount(); ++index2) {
+                        View nextChild2 = (containertemppopup).getChildAt(index2);
+                        if (nextChild2 instanceof ImageView) {
+                            imageViewtemp = (ImageView) findViewById(nextChild2.getId());
+                            myimagetag.add(String.valueOf(imageViewtemp.getTag()));
+                        }
+                    }
+
+                    Iterator<String> myListIterator = myimagetag.iterator();
+                    while (myListIterator.hasNext()) {
+                        String coord = myListIterator.next();
+                    }
+
+                    containertemp = (RelativeLayout) mView.findViewById(R.id.popup);
+                    for(int index3=0; index3<(containertemp).getChildCount(); ++index3) {
+                        View nextChild3 = (containertemp).getChildAt(index3);
+                        if (nextChild3 instanceof ImageView) {
+                            imageViewtemp2 = (ImageView) findViewById(nextChild3.getId());
+
+                        }
+                    }*/
+
                     mbuilder.setView(mView);
                     AlertDialog dialog = mbuilder.create();
                     dialog.show();
                 }
             }
-
         }
     };
 
@@ -202,24 +270,19 @@ public class MainActivity extends AppCompatActivity {
 
             final View view = (View) event.getLocalState();
 
-            Log.i("test", String.valueOf(view.getId()));
             containertemp = (RelativeLayout) findViewById(view.getId());
 
             switch (dragevent){
                 case DragEvent.ACTION_DRAG_STARTED:
-                    //imagetemp.setVisibility(View.INVISIBLE);
                     containertemp.setVisibility(View.GONE);
 
                 case DragEvent.ACTION_DRAG_ENTERED:
                     break;
 
                 case DragEvent.ACTION_DROP:
-                    Log.i("drag lisener", "drop");
 
-                    //imagetemp.setVisibility(View.VISIBLE);
                     containertemp.setVisibility(View.VISIBLE);
                     if(v.getId()==R.id.zonedrop2){
-                        Log.i("ok","ok");
                         ViewGroup from = (ViewGroup) view.getParent();
                         from.removeView(view);
                         //LinearLayout container = (LinearLayout) v;
@@ -228,16 +291,13 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
                     if(v.getId()==R.id.zonedrop1){
-                        Log.i("ok","ok");
                         ViewGroup from = (ViewGroup) view.getParent();
                         from.removeView(view);
-                        //LinearLayout container = (LinearLayout) v;
                         LinearLayout container = (LinearLayout) findViewById(R.id.list_des_taches1);
                         container.addView(view);
                         break;
                     }
                     if(v.getId()==R.id.zonedrop3){
-                        Log.i("ok","ok");
                         ViewGroup from = (ViewGroup) view.getParent();
                         from.removeView(view);
                         LinearLayout container = (LinearLayout) findViewById(R.id.list_des_taches3);

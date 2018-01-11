@@ -1,21 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/popup">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:id="@+id/titre"
         android:textAlignment="center"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:text="Details de la tâche"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/popupassignes"
+        android:layout_below="@id/titre"
+        android:layout_margin="10dp"
+        android:text="Utilisateurs assignés"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/titre"
+        android:layout_toEndOf="@id/popupassignes"
+        android:layout_margin="10dp"
+        android:id="@+id/userpopup1"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/titre"
+        android:layout_toEndOf="@id/userpopup1"
+        android:layout_margin="10dp"
+        android:id="@+id/userpopup2"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/titre"
+        android:layout_toEndOf="@id/userpopup2"
+        android:layout_margin="10dp"
+        android:id="@+id/userpopup3"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/titre"
+        android:layout_toEndOf="@id/userpopup3"
+        android:layout_margin="10dp"
+        android:id="@+id/userpopup4"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/popuptextdetaille"
+        android:layout_below="@id/popupassignes"
         android:textAlignment="center"
-        android:textSize="22sp"
+        android:textSize="12sp"
         android:text="rien"/>
 
-</LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/buttoncorrection"
+        android:layout_below="@id/popuptextdetaille"
+        android:text="changer la tâche"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/tachecorrigee"
+        android:visibility="gone"
+        android:layout_below="@id/buttoncorrection"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/validationcorrection"
+        android:visibility="gone"
+        android:layout_below="@id/tachecorrigee"
+        android:text="Valider la correction"/>
+
+</RelativeLayout>
