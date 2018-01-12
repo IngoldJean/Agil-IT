@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView picutilisateur1, picutilisateur2, picutilisateur3, picutilisateur4, picutilisateur5, picutilisateur6, imageViewtemp, imageViewtemp2, imageViewtemp3;
     RelativeLayout container1, container2, container3, container4, container5, container6, containertemp, containertemp2, containertemppopup;
     Button mButton;
-    //List<String> myimagetag = new ArrayList<String>();
+
+    ImageView vertRema, bleuRema, jauneRema, rougeRema;
 
     Integer Toggle = 1;
 
@@ -67,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
         picutilisateur4 = (ImageView) findViewById(R.id.picutilisateur4);
         picutilisateur5 = (ImageView) findViewById(R.id.picutilisateur5);
         picutilisateur6 = (ImageView) findViewById(R.id.picutilisateur6);
+
+        vertRema = (ImageView) findViewById(R.id.IVvertRema);
+        jauneRema = (ImageView) findViewById(R.id.IVjauneRema);
+        rougeRema = (ImageView) findViewById(R.id.IVrougeRema);
+        bleuRema = (ImageView) findViewById(R.id.IVbleuRema);
 
 
 
@@ -332,6 +338,32 @@ public class MainActivity extends AppCompatActivity {
                     int dejavu = 0;
                     containertemp = (RelativeLayout) findViewById(v.getId());
 
+                    if(Objects.equals(String.valueOf(imageViewtemp.getTag()), "bleuR") || Objects.equals(String.valueOf(imageViewtemp.getTag()), "jauneR") || Objects.equals(String.valueOf(imageViewtemp.getTag()), "rougeR") || Objects.equals(String.valueOf(imageViewtemp.getTag()), "vertR"))
+                    {
+                        Log.i("bien joue1", "Jean");
+                        for(int indexR1=0; indexR1<(containertemp).getChildCount(); ++indexR1) {
+                            View nextChildR1 = (containertemp).getChildAt(indexR1);
+
+
+                            if (Objects.equals(String.valueOf(nextChildR1.getTag()), "deposeR")) {
+                                Log.i("bien joue2", "Jean");
+                                ImageView temp = new ImageView(MainActivity.this);
+                                linearLayoutTest = (LinearLayout) findViewById(nextChildR1.getId());
+                                LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(30, 30);
+
+                                params1.setMargins(10,10,10,10);
+                                params1.height = 30;
+                                params1.width = 30;
+
+                                temp.setBackground(imageViewtemp.getBackground());
+
+                                linearLayoutTest.addView(temp, params1);
+                            }
+                        }
+
+                        break;
+                    }
+
                     for(int index=0; index<(containertemp).getChildCount(); ++index) {
                         View nextChild = (containertemp).getChildAt(index);
                         if(nextChild.getTag() != imageViewtemp.getTag()) {
@@ -400,6 +432,16 @@ public class MainActivity extends AppCompatActivity {
             picutilisateur5.setOnLongClickListener(assigneUtilisateur);
             picutilisateur6.setOnLongClickListener(assigneUtilisateur);
 
+            bleuRema.setVisibility(View.VISIBLE);
+            rougeRema.setVisibility(View.VISIBLE);
+            jauneRema.setVisibility(View.VISIBLE);
+            vertRema.setVisibility(View.VISIBLE);
+
+            bleuRema.setOnLongClickListener(assigneUtilisateur);
+            rougeRema.setOnLongClickListener(assigneUtilisateur);
+            jauneRema.setOnLongClickListener(assigneUtilisateur);
+            vertRema.setOnLongClickListener(assigneUtilisateur);
+
             utilisateursList = (LinearLayout) findViewById(R.id.list_des_perso);
             for(int inde=0; inde<(utilisateursList).getChildCount(); ++inde) {
                 View nextChil = (utilisateursList).getChildAt(inde);
@@ -446,12 +488,22 @@ public class MainActivity extends AppCompatActivity {
                 container5.setOnDragListener(null);
                 container6.setOnDragListener(null);
 
+                bleuRema.setOnLongClickListener(null);
+                rougeRema.setOnLongClickListener(null);
+                jauneRema.setOnLongClickListener(null);
+                vertRema.setOnLongClickListener(null);
+
                 picutilisateur1.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
                 picutilisateur2.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
                 picutilisateur3.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
                 picutilisateur4.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
                 picutilisateur5.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
                 picutilisateur6.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
+
+                bleuRema.setVisibility(View.GONE);
+                rougeRema.setVisibility(View.GONE);
+                jauneRema.setVisibility(View.GONE);
+                vertRema.setVisibility(View.GONE);
 
                 container1.setOnLongClickListener(containerLongClickListener);
                 container2.setOnLongClickListener(containerLongClickListener);

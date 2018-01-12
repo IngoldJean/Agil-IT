@@ -5,4 +5,9 @@
     <color name="colorAccent">#FF4081</color>
     <color name="color3">#fd6153</color>
     <color name="colorgris">#DCDCDC</color>
+
+    <color name="rougeremaining">#C3192A</color>
+    <color name="bleuremaining">#352FF4</color>
+    <color name="jauneremaining">#E2E22B</color>
+    <color name="vertremaining">#1DBD32</color>
 </resources>
