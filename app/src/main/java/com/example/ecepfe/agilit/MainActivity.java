@@ -17,11 +17,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Objects;
 
 
@@ -32,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     TextView textcont1, textcont2, textcont3, textcont4, textcont5, textcont6, texttemp;
     ImageView picutilisateur1, picutilisateur2, picutilisateur3, picutilisateur4, picutilisateur5, picutilisateur6, imageViewtemp, imageViewtemp2, imageViewtemp3;
     RelativeLayout container1, container2, container3, container4, container5, container6, containertemp, containertemp2, containertemppopup;
-    Button mButton;
 
     ImageView vertRema, bleuRema, jauneRema, rougeRema;
 
@@ -44,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("Déplacez les tâches");
 
+
+        //Assignations
         zonededrop1 = (ScrollView) findViewById(R.id.zonedrop1);
         zonededrop2 = (ScrollView) findViewById(R.id.zonedrop2);
         zonededrop3 = (ScrollView) findViewById(R.id.zonedrop3);
@@ -75,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         bleuRema = (ImageView) findViewById(R.id.IVbleuRema);
 
 
-
+        //Listenerisation
         container1.setOnLongClickListener(containerLongClickListener);
         container2.setOnLongClickListener(containerLongClickListener);
         container3.setOnLongClickListener(containerLongClickListener);
@@ -90,16 +86,28 @@ public class MainActivity extends AppCompatActivity {
         container5.setOnClickListener(affichagepopupdisplaycontent);
         container6.setOnClickListener(affichagepopupdisplaycontent);
 
-        picutilisateur1.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
-        picutilisateur2.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
-        picutilisateur3.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
-        picutilisateur4.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
-        picutilisateur5.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
-        picutilisateur6.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
+        picutilisateur1.setOnLongClickListener(assigneUtilisateurORReminer);
+        picutilisateur2.setOnLongClickListener(assigneUtilisateurORReminer);
+        picutilisateur3.setOnLongClickListener(assigneUtilisateurORReminer);
+        picutilisateur4.setOnLongClickListener(assigneUtilisateurORReminer);
+        picutilisateur5.setOnLongClickListener(assigneUtilisateurORReminer);
+        picutilisateur6.setOnLongClickListener(assigneUtilisateurORReminer);
 
-        zonededrop1.setOnDragListener(onDragListener);
-        zonededrop2.setOnDragListener(onDragListener);
-        zonededrop3.setOnDragListener(onDragListener);
+        picutilisateur1.setOnClickListener(onClickpicture);
+        picutilisateur2.setOnClickListener(onClickpicture);
+        picutilisateur3.setOnClickListener(onClickpicture);
+        picutilisateur4.setOnClickListener(onClickpicture);
+        picutilisateur5.setOnClickListener(onClickpicture);
+        picutilisateur6.setOnClickListener(onClickpicture);
+
+        bleuRema.setOnLongClickListener(assigneUtilisateurORReminer);
+        rougeRema.setOnLongClickListener(assigneUtilisateurORReminer);
+        jauneRema.setOnLongClickListener(assigneUtilisateurORReminer);
+        vertRema.setOnLongClickListener(assigneUtilisateurORReminer);
+
+        zonededrop1.setOnDragListener(null);
+        zonededrop2.setOnDragListener(null);
+        zonededrop3.setOnDragListener(null);
     }
 
 
@@ -161,28 +169,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
 
-                    /*for(int index2=0; index2<(containertemppopup).getChildCount(); ++index2) {
-                        View nextChild2 = (containertemppopup).getChildAt(index2);
-                        if (nextChild2 instanceof ImageView) {
-                            imageViewtemp = (ImageView) findViewById(nextChild2.getId());
-                            myimagetag.add(String.valueOf(imageViewtemp.getTag()));
-                        }
-                    }
-
-                    Iterator<String> myListIterator = myimagetag.iterator();
-                    while (myListIterator.hasNext()) {
-                        String coord = myListIterator.next();
-                    }
-
-                    containertemp = (RelativeLayout) mView.findViewById(R.id.popup);
-                    for(int index3=0; index3<(containertemp).getChildCount(); ++index3) {
-                        View nextChild3 = (containertemp).getChildAt(index3);
-                        if (nextChild3 instanceof ImageView) {
-                            imageViewtemp2 = (ImageView) findViewById(nextChild3.getId());
-
-                        }
-                    }*/
-
                     mbuilder.setView(mView);
                     AlertDialog dialog = mbuilder.create();
                     dialog.show();
@@ -191,10 +177,83 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    View.OnClickListener onClickpicture = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+
+            utilisateursList = (LinearLayout) findViewById(R.id.list_des_perso);
+            for (int inde = 0; inde < (utilisateursList).getChildCount(); ++inde) {
+                View nextChil = (utilisateursList).getChildAt(inde);
+                if (nextChil instanceof ImageView) {
+                    imageViewtemp = (ImageView) nextChil;
+                    imageViewtemp.setImageAlpha(128);
+                }
+            }
+
+            imageViewtemp = (ImageView) findViewById(v.getId());
+            imageViewtemp.setImageAlpha(255);
+
+            linearLayoutTest = (LinearLayout) findViewById(R.id.fullscreen);
+
+            for (int index = 0; index < (linearLayoutTest).getChildCount(); ++index) {
+                View nextChild = (linearLayoutTest).getChildAt(index);
+                if (nextChild instanceof ScrollView) {
+
+                    scrollViewTest = (ScrollView) findViewById(nextChild.getId());
+                    for (int index2 = 0; index2 < (scrollViewTest).getChildCount(); ++index2) {
+                        View nextChild2 = (scrollViewTest).getChildAt(index2);
+                        if (nextChild2 instanceof LinearLayout) {
+
+                            linearLayoutTest2 = (LinearLayout) findViewById(nextChild2.getId());
+                            for (int index3 = 0; index3 < (linearLayoutTest2).getChildCount(); ++index3) {
+                                View nextChild3 = (linearLayoutTest2).getChildAt(index3);
+                                if (nextChild3 instanceof RelativeLayout) {
+
+                                    containertemp = (RelativeLayout) findViewById(nextChild3.getId());
+                                    containertemp.setAlpha(0.5F);
+                                    for (int index4 = 0; index4 < (containertemp).getChildCount(); ++index4) {
+                                        View nextChild4 = (containertemp).getChildAt(index4);
+                                        if (nextChild4 instanceof ImageView) {
+
+                                            ImageView imageViewtemp2 = (ImageView) findViewById(nextChild4.getId());
+
+                                            if (imageViewtemp2.getTag() == imageViewtemp.getTag()) {
+                                                containertemp.setAlpha(1F);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    };
 
     View.OnLongClickListener containerLongClickListener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
+
+            container1.setOnDragListener(null);
+            container2.setOnDragListener(null);
+            container3.setOnDragListener(null);
+            container4.setOnDragListener(null);
+            container5.setOnDragListener(null);
+            container6.setOnDragListener(null);
+
+            container1.setOnLongClickListener(containerLongClickListener);
+            container2.setOnLongClickListener(containerLongClickListener);
+            container3.setOnLongClickListener(containerLongClickListener);
+            container4.setOnLongClickListener(containerLongClickListener);
+            container5.setOnLongClickListener(containerLongClickListener);
+            container6.setOnLongClickListener(containerLongClickListener);
+
+            zonededrop1.setOnDragListener(onDragListener);
+            zonededrop2.setOnDragListener(onDragListener);
+            zonededrop3.setOnDragListener(onDragListener);
+
             ClipData clipData = ClipData.newPlainText("", "");
             View.DragShadowBuilder dragShadowBuilder = new View.DragShadowBuilder(v);
             v.startDrag(clipData, dragShadowBuilder, v, 0);
@@ -203,9 +262,67 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    View.OnLongClickListener assigneUtilisateur = new View.OnLongClickListener() {
+    View.OnLongClickListener assigneUtilisateurORReminer = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
+
+            zonededrop1.setOnDragListener(null);
+            zonededrop2.setOnDragListener(null);
+            zonededrop3.setOnDragListener(null);
+
+            container1.setOnLongClickListener(null);
+            container2.setOnLongClickListener(null);
+            container3.setOnLongClickListener(null);
+            container4.setOnLongClickListener(null);
+            container5.setOnLongClickListener(null);
+            container6.setOnLongClickListener(null);
+
+            container1.setOnDragListener(onDragListenerUserPic);
+            container2.setOnDragListener(onDragListenerUserPic);
+            container3.setOnDragListener(onDragListenerUserPic);
+            container4.setOnDragListener(onDragListenerUserPic);
+            container5.setOnDragListener(onDragListenerUserPic);
+            container6.setOnDragListener(onDragListenerUserPic);
+
+            bleuRema.setOnLongClickListener(assigneUtilisateurORReminer);
+            rougeRema.setOnLongClickListener(assigneUtilisateurORReminer);
+            jauneRema.setOnLongClickListener(assigneUtilisateurORReminer);
+            vertRema.setOnLongClickListener(assigneUtilisateurORReminer);
+
+            utilisateursList = (LinearLayout) findViewById(R.id.list_des_perso);
+            for(int inde=0; inde<(utilisateursList).getChildCount(); ++inde) {
+                View nextChil = (utilisateursList).getChildAt(inde);
+                if (nextChil instanceof ImageView) {
+                    imageViewtemp = (ImageView) nextChil;
+                    imageViewtemp.setImageAlpha(255);
+                }
+            }
+
+            linearLayoutTest = (LinearLayout) findViewById(R.id.fullscreen);
+
+            for(int index=0; index<(linearLayoutTest).getChildCount(); ++index) {
+                View nextChild = (linearLayoutTest).getChildAt(index);
+                if (nextChild instanceof ScrollView) {
+
+                    scrollViewTest = (ScrollView) findViewById(nextChild.getId());
+                    for(int index2=0; index2<(scrollViewTest).getChildCount(); ++index2) {
+                        View nextChild2 = (scrollViewTest).getChildAt(index2);
+                        if (nextChild2 instanceof LinearLayout) {
+
+                            linearLayoutTest2 = (LinearLayout) findViewById(nextChild2.getId());
+                            for(int index3=0; index3<(linearLayoutTest2).getChildCount(); ++index3) {
+                                View nextChild3 = (linearLayoutTest2).getChildAt(index3);
+                                if (nextChild3 instanceof RelativeLayout) {
+
+                                    containertemp = (RelativeLayout) findViewById(nextChild3.getId());
+                                    containertemp.setAlpha(1F);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             ClipData clipData = ClipData.newPlainText("", "");
             View.DragShadowBuilder dragShadowBuilder = new View.DragShadowBuilder(v);
             v.startDrag(clipData, dragShadowBuilder, v, 0);
@@ -213,7 +330,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    View.OnLongClickListener DisplaylongClickListenerUtilisateur = new View.OnLongClickListener() {
+    /*View.OnLongClickListener DisplaylongClickListenerUtilisateur = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
 
@@ -266,7 +383,7 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         }
-    };
+    };*/
 
 
     View.OnDragListener onDragListener = new View.OnDragListener(){
@@ -340,18 +457,16 @@ public class MainActivity extends AppCompatActivity {
 
                     if(Objects.equals(String.valueOf(imageViewtemp.getTag()), "bleuR") || Objects.equals(String.valueOf(imageViewtemp.getTag()), "jauneR") || Objects.equals(String.valueOf(imageViewtemp.getTag()), "rougeR") || Objects.equals(String.valueOf(imageViewtemp.getTag()), "vertR"))
                     {
-                        Log.i("bien joue1", "Jean");
                         for(int indexR1=0; indexR1<(containertemp).getChildCount(); ++indexR1) {
                             View nextChildR1 = (containertemp).getChildAt(indexR1);
 
 
                             if (Objects.equals(String.valueOf(nextChildR1.getTag()), "deposeR")) {
-                                Log.i("bien joue2", "Jean");
                                 ImageView temp = new ImageView(MainActivity.this);
                                 linearLayoutTest = (LinearLayout) findViewById(nextChildR1.getId());
                                 LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(30, 30);
 
-                                params1.setMargins(10,10,10,10);
+                                params1.setMargins(10,0,10,10);
                                 params1.height = 30;
                                 params1.width = 30;
 
@@ -397,128 +512,15 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
             }
+
+            container1.setOnLongClickListener(containerLongClickListener);
+            container2.setOnLongClickListener(containerLongClickListener);
+            container3.setOnLongClickListener(containerLongClickListener);
+            container4.setOnLongClickListener(containerLongClickListener);
+            container5.setOnLongClickListener(containerLongClickListener);
+            container6.setOnLongClickListener(containerLongClickListener);
+
             return true;
         }
     };
-
-
-    public void launchActiviteAssign(View view) {
-
-        mButton = (Button) findViewById(R.id.boutonassign);
-
-        if(Toggle == 1) {
-            zonededrop1.setOnDragListener(null);
-            zonededrop2.setOnDragListener(null);
-            zonededrop3.setOnDragListener(null);
-
-            container1.setOnLongClickListener(null);
-            container2.setOnLongClickListener(null);
-            container3.setOnLongClickListener(null);
-            container4.setOnLongClickListener(null);
-            container5.setOnLongClickListener(null);
-            container6.setOnLongClickListener(null);
-
-            container1.setOnDragListener(onDragListenerUserPic);
-            container2.setOnDragListener(onDragListenerUserPic);
-            container3.setOnDragListener(onDragListenerUserPic);
-            container4.setOnDragListener(onDragListenerUserPic);
-            container5.setOnDragListener(onDragListenerUserPic);
-            container6.setOnDragListener(onDragListenerUserPic);
-
-            picutilisateur1.setOnLongClickListener(assigneUtilisateur);
-            picutilisateur2.setOnLongClickListener(assigneUtilisateur);
-            picutilisateur3.setOnLongClickListener(assigneUtilisateur);
-            picutilisateur4.setOnLongClickListener(assigneUtilisateur);
-            picutilisateur5.setOnLongClickListener(assigneUtilisateur);
-            picutilisateur6.setOnLongClickListener(assigneUtilisateur);
-
-            bleuRema.setVisibility(View.VISIBLE);
-            rougeRema.setVisibility(View.VISIBLE);
-            jauneRema.setVisibility(View.VISIBLE);
-            vertRema.setVisibility(View.VISIBLE);
-
-            bleuRema.setOnLongClickListener(assigneUtilisateur);
-            rougeRema.setOnLongClickListener(assigneUtilisateur);
-            jauneRema.setOnLongClickListener(assigneUtilisateur);
-            vertRema.setOnLongClickListener(assigneUtilisateur);
-
-            utilisateursList = (LinearLayout) findViewById(R.id.list_des_perso);
-            for(int inde=0; inde<(utilisateursList).getChildCount(); ++inde) {
-                View nextChil = (utilisateursList).getChildAt(inde);
-                if (nextChil instanceof ImageView) {
-                    imageViewtemp = (ImageView) nextChil;
-                    imageViewtemp.setImageAlpha(255);
-                }
-            }
-
-            linearLayoutTest = (LinearLayout) findViewById(R.id.fullscreen);
-
-            for(int index=0; index<(linearLayoutTest).getChildCount(); ++index) {
-                View nextChild = (linearLayoutTest).getChildAt(index);
-                if (nextChild instanceof ScrollView) {
-
-                    scrollViewTest = (ScrollView) findViewById(nextChild.getId());
-                    for(int index2=0; index2<(scrollViewTest).getChildCount(); ++index2) {
-                        View nextChild2 = (scrollViewTest).getChildAt(index2);
-                        if (nextChild2 instanceof LinearLayout) {
-
-                            linearLayoutTest2 = (LinearLayout) findViewById(nextChild2.getId());
-                            for(int index3=0; index3<(linearLayoutTest2).getChildCount(); ++index3) {
-                                View nextChild3 = (linearLayoutTest2).getChildAt(index3);
-                                if (nextChild3 instanceof RelativeLayout) {
-
-                                    containertemp = (RelativeLayout) findViewById(nextChild3.getId());
-                                    containertemp.setAlpha(1F);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            mButton.setText("Déplacement");
-            Toggle = 0;
-        }else {
-            if (Toggle == 0) {
-
-                container1.setOnDragListener(null);
-                container2.setOnDragListener(null);
-                container3.setOnDragListener(null);
-                container4.setOnDragListener(null);
-                container5.setOnDragListener(null);
-                container6.setOnDragListener(null);
-
-                bleuRema.setOnLongClickListener(null);
-                rougeRema.setOnLongClickListener(null);
-                jauneRema.setOnLongClickListener(null);
-                vertRema.setOnLongClickListener(null);
-
-                picutilisateur1.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
-                picutilisateur2.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
-                picutilisateur3.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
-                picutilisateur4.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
-                picutilisateur5.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
-                picutilisateur6.setOnLongClickListener(DisplaylongClickListenerUtilisateur);
-
-                bleuRema.setVisibility(View.GONE);
-                rougeRema.setVisibility(View.GONE);
-                jauneRema.setVisibility(View.GONE);
-                vertRema.setVisibility(View.GONE);
-
-                container1.setOnLongClickListener(containerLongClickListener);
-                container2.setOnLongClickListener(containerLongClickListener);
-                container3.setOnLongClickListener(containerLongClickListener);
-                container4.setOnLongClickListener(containerLongClickListener);
-                container5.setOnLongClickListener(containerLongClickListener);
-                container6.setOnLongClickListener(containerLongClickListener);
-
-                zonededrop1.setOnDragListener(onDragListener);
-                zonededrop2.setOnDragListener(onDragListener);
-                zonededrop3.setOnDragListener(onDragListener);
-
-                mButton.setText("Assignation");
-                Toggle = 1;
-            }
-        }
-    }
 }
