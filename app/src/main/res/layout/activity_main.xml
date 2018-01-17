@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:id="@+id/contenertext1"
-                    android:layout_toRightOf="@id/unused10"
+                    android:layout_toEndOf="@id/unused10"
                     android:ellipsize="end"
                     android:maxLines="5"
                     android:text="Nous marquons ici le premier texte qui sera affichage via le click dessus dans une magnifique popup"/>
@@ -117,7 +117,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:layout_toRightOf="@id/unused20"
+                    android:layout_toEndOf="@id/unused20"
                     android:ellipsize="end"
                     android:maxLines="5"
                     android:text="I need to get reference to separate XML file wich is FrameLayout but I can't figure out how to do it ,this code doesn't work: " />
@@ -129,7 +129,9 @@
                     android:layout_below="@id/contenertext2"
                     android:layout_toEndOf="@id/unused20"
                     android:orientation="horizontal"
-                    android:tag="deposeR"></LinearLayout>
+                    android:tag="deposeR">
+                </LinearLayout>
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -170,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/contenertext3"
                     android:layout_margin="10dp"
-                    android:layout_toRightOf="@id/unused30"
+                    android:layout_toEndOf="@id/unused30"
                     android:ellipsize="end"
                     android:maxLines="5"
                     android:text="Using RelativeLayout, you can align two elements by right border, or make one below another, centered in the screen, centered left, and so on. By default, all child views are drawn at the top-left of the layout, so you must define the position of each view using the various layout properties available from"/>
@@ -223,7 +225,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/contenertext4"
-                    android:layout_toRightOf="@id/unused40"
+                    android:layout_toEndOf="@id/unused40"
                     android:layout_margin="10dp"
                     android:ellipsize="end"
                     android:maxLines="5"

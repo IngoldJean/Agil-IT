@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="testidRL" type="id"/>
+    <item name="testidIV" type="id"/>
+    <item name="testidTV" type="id"/>
+
+    <item name="image1container1" type="id"/>
+    <item name="image2container1" type="id"/>
+    <item name="image3container1" type="id"/>
+    <item name="image4container1" type="id"/>
+</resources>

@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
@@ -17,6 +18,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -25,12 +28,10 @@ public class MainActivity extends AppCompatActivity {
     ScrollView zonededrop1, zonededrop2, zonededrop3, scrollViewTest;
     LinearLayout linearLayoutTest, linearLayoutTest2, utilisateursList;
     TextView textcont1, textcont2, textcont3, textcont4, textcont5, textcont6, texttemp;
-    ImageView picutilisateur1, picutilisateur2, picutilisateur3, picutilisateur4, picutilisateur5, picutilisateur6, imageViewtemp, imageViewtemp2, imageViewtemp3;
+    ImageView picutilisateur1, picutilisateur2, picutilisateur3, picutilisateur4, picutilisateur5, picutilisateur6, imageViewtemp, imageViewtemp2, imageViewtemp3, vertRema, bleuRema, jauneRema, rougeRema;
     RelativeLayout container1, container2, container3, container4, container5, container6, containertemp, containertemp2, containertemppopup;
-
-    ImageView vertRema, bleuRema, jauneRema, rougeRema;
-
-    Integer Toggle = 1;
+    ContainerTache testcontainer = new ContainerTache();
+    //List<ContainerTache> listecontainer = new ArrayList<ContainerTache>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("Déplacez les tâches");
 
-
-        //Assignations
+        //region Affectation des variables
         zonededrop1 = (ScrollView) findViewById(R.id.zonedrop1);
         zonededrop2 = (ScrollView) findViewById(R.id.zonedrop2);
         zonededrop3 = (ScrollView) findViewById(R.id.zonedrop3);
@@ -69,9 +69,9 @@ public class MainActivity extends AppCompatActivity {
         jauneRema = (ImageView) findViewById(R.id.IVjauneRema);
         rougeRema = (ImageView) findViewById(R.id.IVrougeRema);
         bleuRema = (ImageView) findViewById(R.id.IVbleuRema);
+        //endregion
 
-
-        //Listenerisation
+        //region Listenerisation
         container1.setOnLongClickListener(containerLongClickListener);
         container2.setOnLongClickListener(containerLongClickListener);
         container3.setOnLongClickListener(containerLongClickListener);
@@ -108,10 +108,24 @@ public class MainActivity extends AppCompatActivity {
         zonededrop1.setOnDragListener(null);
         zonededrop2.setOnDragListener(null);
         zonededrop3.setOnDragListener(null);
+        //endregion
+
+        List<String> testlist = new ArrayList<String>();;
+        testlist.add("utilisateur1");
+        testlist.add("utilisateur2");
+        testlist.add("utilisateur3");
+        testcontainer.setUtilisateurs(testlist);
+        testcontainer.setEtatdelatache("etat2");
+        testcontainer.setRemaining(28);
+        testcontainer.setTache("Voici une tâche créer dynamiquement");
+
+        Global.listecontainer.add(testcontainer);
+
+        ajouterTachesDynamiquement(Global.listecontainer);
     }
 
 
-
+    //region Affichage popup  (OnClickListener)
     View.OnClickListener affichagepopupdisplaycontent = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -176,7 +190,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+    //endregion
 
+    //region Focus sur les tâche de l'utilisateur  (OnClickListener)
     View.OnClickListener onClickpicture = new View.OnClickListener() {
 
         @Override
@@ -231,7 +247,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+    //endregion
 
+    //region Lancement Drag container  (OnLongClickListener)
     View.OnLongClickListener containerLongClickListener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
@@ -261,7 +279,9 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     };
+    //endregion
 
+    //region Assignation Utilisateur ou Reminer  (OnLongClickListener)
     View.OnLongClickListener assigneUtilisateurORReminer = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
@@ -329,63 +349,9 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     };
+    //endregion
 
-    /*View.OnLongClickListener DisplaylongClickListenerUtilisateur = new View.OnLongClickListener() {
-        @Override
-        public boolean onLongClick(View v) {
-
-            utilisateursList = (LinearLayout) findViewById(R.id.list_des_perso);
-            for(int inde=0; inde<(utilisateursList).getChildCount(); ++inde) {
-                View nextChil = (utilisateursList).getChildAt(inde);
-                if (nextChil instanceof ImageView) {
-                    imageViewtemp = (ImageView) nextChil;
-                    imageViewtemp.setImageAlpha(128);
-                }
-            }
-
-            imageViewtemp = (ImageView) findViewById(v.getId());
-            imageViewtemp.setImageAlpha(255);
-
-            linearLayoutTest = (LinearLayout) findViewById(R.id.fullscreen);
-
-            for(int index=0; index<(linearLayoutTest).getChildCount(); ++index) {
-                View nextChild = (linearLayoutTest).getChildAt(index);
-                if (nextChild instanceof ScrollView) {
-
-                    scrollViewTest = (ScrollView) findViewById(nextChild.getId());
-                    for(int index2=0; index2<(scrollViewTest).getChildCount(); ++index2) {
-                        View nextChild2 = (scrollViewTest).getChildAt(index2);
-                        if (nextChild2 instanceof LinearLayout) {
-
-                            linearLayoutTest2 = (LinearLayout) findViewById(nextChild2.getId());
-                            for(int index3=0; index3<(linearLayoutTest2).getChildCount(); ++index3) {
-                                View nextChild3 = (linearLayoutTest2).getChildAt(index3);
-                                if (nextChild3 instanceof RelativeLayout) {
-
-                                    containertemp = (RelativeLayout) findViewById(nextChild3.getId());
-                                    containertemp.setAlpha(0.5F);
-                                    for(int index4=0; index4<(containertemp).getChildCount(); ++index4) {
-                                        View nextChild4 = (containertemp).getChildAt(index4);
-                                        if (nextChild4 instanceof ImageView) {
-
-                                            ImageView imageViewtemp2 = (ImageView) findViewById(nextChild4.getId());
-
-                                            if (imageViewtemp2.getTag() == imageViewtemp.getTag()){
-                                                containertemp.setAlpha(1F);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            return true;
-        }
-    };*/
-
-
+    //region Drop container  (OnDragListener)
     View.OnDragListener onDragListener = new View.OnDragListener(){
         @Override
         public boolean onDrag(View v, DragEvent event) {
@@ -432,8 +398,9 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     };
+    //endregion
 
-
+    //region Drop Utilisateur ou Reminer   (OnDragListener)
     View.OnDragListener onDragListenerUserPic = new View.OnDragListener(){
         @Override
         public boolean onDrag(View v, DragEvent event) {
@@ -523,4 +490,113 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     };
+    //endregion
+
+
+
+    public void ajouterTachesDynamiquement(List<ContainerTache> listecontainer){
+
+        RelativeLayout construction = new RelativeLayout(this);
+        LinearLayout.LayoutParams paramsContainer = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        paramsContainer.setMargins(15,15,15,15);
+
+        construction.setLayoutParams(paramsContainer);
+        construction.setBackgroundResource(R.color.colorgris);
+        construction.setId(R.id.testidRL);
+
+        ImageView tempImageDY1 = new ImageView(MainActivity.this);
+        ImageView tempImageDY2 = new ImageView(MainActivity.this);
+        ImageView tempImageDY3 = new ImageView(MainActivity.this);
+        ImageView tempImageDY4 = new ImageView(MainActivity.this);
+
+        TextView tempText = new TextView(MainActivity.this);
+        LinearLayout linearTemp = new LinearLayout(MainActivity.this);
+
+        for(ContainerTache i : listecontainer) {
+            //Log.i("1", i.getEtatdelatache());
+            //Log.i("2", i.getTache());
+            //Log.i("3", String.valueOf(i.getRemaining()));
+            //Log.i("4", String.valueOf(i.getUtilisateurs()));
+
+            RelativeLayout.LayoutParams paramsImage1 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            paramsImage1.setMargins(4,4,4,4);
+            paramsImage1.height = 60;
+            paramsImage1.width = 60;
+            tempImageDY1.setBackgroundResource(R.drawable.helene);
+            tempImageDY1.setId(R.id.image1container1);
+
+            RelativeLayout.LayoutParams paramsImage2 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            paramsImage2.setMargins(4,4,4,4);
+            paramsImage2.height = 60;
+            paramsImage2.width = 60;
+            paramsImage2.addRule(RelativeLayout.BELOW, R.id.image1container1);
+            tempImageDY2.setBackgroundResource(R.drawable.poseidon);
+            tempImageDY2.setId(R.id.image2container1);
+
+            RelativeLayout.LayoutParams paramsImage3 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            paramsImage3.setMargins(4,4,4,4);
+            paramsImage3.height = 60;
+            paramsImage3.width = 60;
+            paramsImage3.addRule(RelativeLayout.BELOW, R.id.image2container1);
+            tempImageDY3.setBackgroundResource(R.drawable.helios);
+            tempImageDY3.setId(R.id.image3container1);
+
+            RelativeLayout.LayoutParams paramsImage4 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            paramsImage4.setMargins(4,4,4,4);
+            paramsImage4.height = 60;
+            paramsImage4.width = 60;
+            paramsImage4.addRule(RelativeLayout.BELOW, R.id.image3container1);
+            tempImageDY4.setBackgroundResource(R.drawable.hermes);
+            tempImageDY4.setId(R.id.image4container1);
+
+
+
+            RelativeLayout.LayoutParams paramsText = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            paramsText.setMargins(10,10,10,10);
+            paramsText.addRule(RelativeLayout.RIGHT_OF, R.id.image1container1);
+
+            tempText.setText(i.getTache());
+            tempText.setTextSize(2,15);
+            tempText.setEllipsize(TextUtils.TruncateAt.END);
+            tempText.setMaxLines(5);
+            tempText.setId(R.id.testidTV);
+
+            RelativeLayout.LayoutParams paramsLinearDepose = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            paramsLinearDepose.setMargins(10,10,10,10);
+            paramsLinearDepose.addRule(RelativeLayout.BELOW, R.id.testidTV);
+            paramsLinearDepose.addRule(RelativeLayout.RIGHT_OF, R.id.image1container1);
+            linearTemp.setTag("deposeR");
+            linearTemp.setOrientation(LinearLayout.HORIZONTAL);
+
+            if(i.getRemaining()<41){
+                ajouterReminerCorrespondant(linearTemp, Global.remainingsDistibution[i.getRemaining()]);
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "La tâche "+i.getTache()+" à un trop long remaining", Toast.LENGTH_LONG).show();
+            }
+
+
+
+
+            construction.setId(R.id.testidRL);
+            construction.addView(tempImageDY1, paramsImage1);
+            construction.addView(tempImageDY2, paramsImage2);
+            construction.addView(tempImageDY3, paramsImage3);
+            construction.addView(tempImageDY4, paramsImage4);
+            construction.addView(tempText, paramsText);
+            construction.addView(linearTemp, paramsLinearDepose);
+
+            LinearLayout ttt = (LinearLayout) findViewById(R.id.list_des_taches1);
+            ttt.addView(construction);
+        }
+
+    }
+
+    public void ajouterReminerCorrespondant(LinearLayout layout, String reminerDistribution){
+        String[] parts = reminerDistribution.split(",");
+
+        for(String couleur : parts){
+            Log.i("couleur", couleur);
+        }
+    }
 }
