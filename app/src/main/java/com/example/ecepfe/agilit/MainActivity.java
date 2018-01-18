@@ -1,6 +1,7 @@
 package com.example.ecepfe.agilit;
 
 import android.content.ClipData;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,27 +30,83 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout linearLayoutTest, linearLayoutTest2, utilisateursList;
     TextView textcont1, textcont2, textcont3, textcont4, textcont5, textcont6, texttemp;
     ImageView picutilisateur1, picutilisateur2, picutilisateur3, picutilisateur4, picutilisateur5, picutilisateur6, imageViewtemp, imageViewtemp2, imageViewtemp3, vertRema, bleuRema, jauneRema, rougeRema;
-    RelativeLayout container1, container2, container3, container4, container5, container6, containertemp, containertemp2, containertemppopup;
+    //RelativeLayout container1, container2, container3, container4, container5, container6;
+    RelativeLayout containertemp, containertemp2, containertemppopup;
     ContainerTache testcontainer = new ContainerTache();
-    //List<ContainerTache> listecontainer = new ArrayList<ContainerTache>();
+    ContainerTache testcontainer2 = new ContainerTache();
+    ContainerTache testcontainer3 = new ContainerTache();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("Déplacez les tâches");
+        setTitle("Kanban");
+
+        //region Global variable set
+        Global.idImagelist.clear();
+        Global.incrementeurIDimage = 0;
+        Global.idImagelist.add(R.id.IVid1);
+        Global.idImagelist.add(R.id.IVid2);
+        Global.idImagelist.add(R.id.IVid3);
+        Global.idImagelist.add(R.id.IVid4);
+        Global.idImagelist.add(R.id.IVid5);
+        Global.idImagelist.add(R.id.IVid6);
+        Global.idImagelist.add(R.id.IVid7);
+        Global.idImagelist.add(R.id.IVid8);
+        Global.idImagelist.add(R.id.IVid9);
+        Global.idImagelist.add(R.id.IVid10);
+        Global.idImagelist.add(R.id.IVid11);
+        Global.idImagelist.add(R.id.IVid12);
+        Global.idImagelist.add(R.id.IVid13);
+        Global.idImagelist.add(R.id.IVid14);
+        Global.idImagelist.add(R.id.IVid15);
+        Global.idImagelist.add(R.id.IVid16);
+        Global.idImagelist.add(R.id.IVid17);
+        Global.idImagelist.add(R.id.IVid18);
+        Global.idImagelist.add(R.id.IVid19);
+        Global.idImagelist.add(R.id.IVid20);
+        Global.idImagelist.add(R.id.IVid21);
+        Global.idImagelist.add(R.id.IVid22);
+        Global.idImagelist.add(R.id.IVid23);
+        Global.idImagelist.add(R.id.IVid24);
+
+        Global.idTextlist.clear();
+        Global.incrementeurIDtext =0;
+        Global.idTextlist.add(R.id.TVid1);
+        Global.idTextlist.add(R.id.TVid2);
+        Global.idTextlist.add(R.id.TVid3);
+        Global.idTextlist.add(R.id.TVid4);
+        Global.idTextlist.add(R.id.TVid5);
+        Global.idTextlist.add(R.id.TVid6);
+
+        Global.idContainerlist.clear();
+        Global.idContainerlist.add(R.id.Containerid1);
+        Global.idContainerlist.add(R.id.Containerid2);
+        Global.idContainerlist.add(R.id.Containerid3);
+        Global.idContainerlist.add(R.id.Containerid4);
+        Global.idContainerlist.add(R.id.Containerid5);
+        Global.idContainerlist.add(R.id.Containerid6);
+
+        Global.idLinearlist.clear();
+        Global.idLinearlist.add(R.id.Linearid1);
+        Global.idLinearlist.add(R.id.Linearid2);
+        Global.idLinearlist.add(R.id.Linearid3);
+        Global.idLinearlist.add(R.id.Linearid4);
+        Global.idLinearlist.add(R.id.Linearid5);
+        Global.idLinearlist.add(R.id.Linearid6);
+        //endregion
 
         //region Affectation des variables
         zonededrop1 = (ScrollView) findViewById(R.id.zonedrop1);
         zonededrop2 = (ScrollView) findViewById(R.id.zonedrop2);
         zonededrop3 = (ScrollView) findViewById(R.id.zonedrop3);
 
-        container1 = (RelativeLayout) findViewById(R.id.container1);
+        /*container1 = (RelativeLayout) findViewById(R.id.container1);
         container2 = (RelativeLayout) findViewById(R.id.container2);
         container3 = (RelativeLayout) findViewById(R.id.container3);
         container4 = (RelativeLayout) findViewById(R.id.container4);
         container5 = (RelativeLayout) findViewById(R.id.container5);
-        container6 = (RelativeLayout) findViewById(R.id.container6);
+        container6 = (RelativeLayout) findViewById(R.id.container6);*/
 
         textcont1 = (TextView) findViewById(R.id.contenertext1);
         textcont2 = (TextView) findViewById(R.id.contenertext2);
@@ -72,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         //endregion
 
         //region Listenerisation
-        container1.setOnLongClickListener(containerLongClickListener);
+        /*container1.setOnLongClickListener(containerLongClickListener);
         container2.setOnLongClickListener(containerLongClickListener);
         container3.setOnLongClickListener(containerLongClickListener);
         container4.setOnLongClickListener(containerLongClickListener);
@@ -84,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         container3.setOnClickListener(affichagepopupdisplaycontent);
         container4.setOnClickListener(affichagepopupdisplaycontent);
         container5.setOnClickListener(affichagepopupdisplaycontent);
-        container6.setOnClickListener(affichagepopupdisplaycontent);
+        container6.setOnClickListener(affichagepopupdisplaycontent);*/
 
         picutilisateur1.setOnLongClickListener(assigneUtilisateurORReminer);
         picutilisateur2.setOnLongClickListener(assigneUtilisateurORReminer);
@@ -110,18 +167,74 @@ public class MainActivity extends AppCompatActivity {
         zonededrop3.setOnDragListener(null);
         //endregion
 
-        List<String> testlist = new ArrayList<String>();;
+        //region Generation manuelle de la liste des containers
+        List<String> testlist = new ArrayList<String>();
+        List<String> testlist2 = new ArrayList<String>();
+        List<String> testlist3 = new ArrayList<String>();
         testlist.add("utilisateur1");
         testlist.add("utilisateur2");
         testlist.add("utilisateur3");
+
+        testlist2.add("utilisateur6");
+
+        testlist3.add("utilisateur4");
+        testlist3.add("utilisateur2");
+        testlist3.add("utilisateur5");
+
+
+
         testcontainer.setUtilisateurs(testlist);
         testcontainer.setEtatdelatache("etat2");
-        testcontainer.setRemaining(28);
-        testcontainer.setTache("Voici une tâche créer dynamiquement");
+        testcontainer.setRemaining(22);
+        testcontainer.setTache("Voici une tâche créer dynamiquement, Sorry to post to an old question but I was able to fix it using a totally different solution. I was getting this exception but I changed the first line of my onCreatView override from this:");
 
         Global.listecontainer.add(testcontainer);
 
+        testcontainer2.setUtilisateurs(testlist2);
+        testcontainer2.setEtatdelatache("etat1");
+        testcontainer2.setTache("deustache");
+        testcontainer2.setRemaining(36);
+
+        Global.listecontainer.add(testcontainer2);
+
+        testcontainer3.setUtilisateurs(testlist3);
+        testcontainer3.setEtatdelatache("etat3");
+        testcontainer3.setTache("I noticed that when you print a View (implicitly calling toString()), the data printed includes the ID String used in layout files (the one you want) instead of the integer returned by getId(). So I looked at the source code for View's toString() to see how Android was getting that info, and it's actually not too complicated. Try this:");
+        testcontainer3.setRemaining(27);
+
+        Global.listecontainer.add(testcontainer3);
+
+        //endregion
+
         ajouterTachesDynamiquement(Global.listecontainer);
+
+        linearLayoutTest = (LinearLayout) findViewById(R.id.fullscreen);
+        //prendre tous les éléments de l'écran
+        for (int index = 0; index < (linearLayoutTest).getChildCount(); ++index) {
+            View nextChild = (linearLayoutTest).getChildAt(index);
+            //Si c'est un ScrollView
+            if (nextChild instanceof ScrollView) {
+                scrollViewTest = (ScrollView) findViewById(nextChild.getId());
+                //prendre tous les éléments des scrollviews
+                for (int index2 = 0; index2 < (scrollViewTest).getChildCount(); ++index2) {
+                    View nextChild2 = (scrollViewTest).getChildAt(index2);
+                    //Si c'est un LinearLayout
+                    if (nextChild2 instanceof LinearLayout) {
+                        linearLayoutTest2 = (LinearLayout) findViewById(nextChild2.getId());
+                        //prendre tous les éléments du LinearLayout
+                        for (int index3 = 0; index3 < (linearLayoutTest2).getChildCount(); ++index3) {
+                            View nextChild3 = (linearLayoutTest2).getChildAt(index3);
+                            //Si c'est un RelativeLayout
+                            if (nextChild3 instanceof RelativeLayout) {
+                                containertemp = (RelativeLayout) findViewById(nextChild3.getId());
+                                containertemp.setOnLongClickListener(containerLongClickListener);
+                                containertemp.setOnClickListener(affichagepopupdisplaycontent);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
 
@@ -192,17 +305,19 @@ public class MainActivity extends AppCompatActivity {
     };
     //endregion
 
-    //region Focus sur les tâche de l'utilisateur  (OnClickListener)
+    //region Focus sur les tâches de l'utilisateur  (OnClickListener)
     View.OnClickListener onClickpicture = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
 
+            //Tous les utilisateurs
             utilisateursList = (LinearLayout) findViewById(R.id.list_des_perso);
             for (int inde = 0; inde < (utilisateursList).getChildCount(); ++inde) {
                 View nextChil = (utilisateursList).getChildAt(inde);
                 if (nextChil instanceof ImageView) {
                     imageViewtemp = (ImageView) nextChil;
+                    //mettre en transparence
                     imageViewtemp.setImageAlpha(128);
                 }
             }
@@ -211,21 +326,23 @@ public class MainActivity extends AppCompatActivity {
             imageViewtemp.setImageAlpha(255);
 
             linearLayoutTest = (LinearLayout) findViewById(R.id.fullscreen);
-
+            //prendre tous les éléments de l'écran
             for (int index = 0; index < (linearLayoutTest).getChildCount(); ++index) {
                 View nextChild = (linearLayoutTest).getChildAt(index);
+                //Si c'est un ScrollView
                 if (nextChild instanceof ScrollView) {
-
                     scrollViewTest = (ScrollView) findViewById(nextChild.getId());
+                    //prendre tous les éléments des scrollviews
                     for (int index2 = 0; index2 < (scrollViewTest).getChildCount(); ++index2) {
                         View nextChild2 = (scrollViewTest).getChildAt(index2);
+                        //Si c'est un LinearLayout
                         if (nextChild2 instanceof LinearLayout) {
-
                             linearLayoutTest2 = (LinearLayout) findViewById(nextChild2.getId());
+                            //prendre tous les éléments du LinearLayout
                             for (int index3 = 0; index3 < (linearLayoutTest2).getChildCount(); ++index3) {
                                 View nextChild3 = (linearLayoutTest2).getChildAt(index3);
+                                //Si c'est un RelativeLayout
                                 if (nextChild3 instanceof RelativeLayout) {
-
                                     containertemp = (RelativeLayout) findViewById(nextChild3.getId());
                                     containertemp.setAlpha(0.5F);
                                     for (int index4 = 0; index4 < (containertemp).getChildCount(); ++index4) {
@@ -254,7 +371,35 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onLongClick(View v) {
 
-            container1.setOnDragListener(null);
+            linearLayoutTest = (LinearLayout) findViewById(R.id.fullscreen);
+            //prendre tous les éléments de l'écran
+            for (int index = 0; index < (linearLayoutTest).getChildCount(); ++index) {
+                View nextChild = (linearLayoutTest).getChildAt(index);
+                //Si c'est un ScrollView
+                if (nextChild instanceof ScrollView) {
+                    scrollViewTest = (ScrollView) findViewById(nextChild.getId());
+                    //prendre tous les éléments des scrollviews
+                    for (int index2 = 0; index2 < (scrollViewTest).getChildCount(); ++index2) {
+                        View nextChild2 = (scrollViewTest).getChildAt(index2);
+                        //Si c'est un LinearLayout
+                        if (nextChild2 instanceof LinearLayout) {
+                            linearLayoutTest2 = (LinearLayout) findViewById(nextChild2.getId());
+                            //prendre tous les éléments du LinearLayout
+                            for (int index3 = 0; index3 < (linearLayoutTest2).getChildCount(); ++index3) {
+                                View nextChild3 = (linearLayoutTest2).getChildAt(index3);
+                                //Si c'est un RelativeLayout
+                                if (nextChild3 instanceof RelativeLayout) {
+                                    containertemp = (RelativeLayout) findViewById(nextChild3.getId());
+                                    containertemp.setOnDragListener(null);
+                                    containertemp.setOnLongClickListener(containerLongClickListener);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*container1.setOnDragListener(null);
             container2.setOnDragListener(null);
             container3.setOnDragListener(null);
             container4.setOnDragListener(null);
@@ -266,7 +411,7 @@ public class MainActivity extends AppCompatActivity {
             container3.setOnLongClickListener(containerLongClickListener);
             container4.setOnLongClickListener(containerLongClickListener);
             container5.setOnLongClickListener(containerLongClickListener);
-            container6.setOnLongClickListener(containerLongClickListener);
+            container6.setOnLongClickListener(containerLongClickListener);*/
 
             zonededrop1.setOnDragListener(onDragListener);
             zonededrop2.setOnDragListener(onDragListener);
@@ -290,19 +435,47 @@ public class MainActivity extends AppCompatActivity {
             zonededrop2.setOnDragListener(null);
             zonededrop3.setOnDragListener(null);
 
-            container1.setOnLongClickListener(null);
-            container2.setOnLongClickListener(null);
-            container3.setOnLongClickListener(null);
-            container4.setOnLongClickListener(null);
-            container5.setOnLongClickListener(null);
-            container6.setOnLongClickListener(null);
+            //container1.setOnLongClickListener(null);
+            //container2.setOnLongClickListener(null);
+            //container3.setOnLongClickListener(null);
+            //container4.setOnLongClickListener(null);
+            //container5.setOnLongClickListener(null);
+            //container6.setOnLongClickListener(null);
 
-            container1.setOnDragListener(onDragListenerUserPic);
-            container2.setOnDragListener(onDragListenerUserPic);
-            container3.setOnDragListener(onDragListenerUserPic);
-            container4.setOnDragListener(onDragListenerUserPic);
-            container5.setOnDragListener(onDragListenerUserPic);
-            container6.setOnDragListener(onDragListenerUserPic);
+            //container1.setOnDragListener(onDragListenerUserPic);
+            //container2.setOnDragListener(onDragListenerUserPic);
+            //container3.setOnDragListener(onDragListenerUserPic);
+            //container4.setOnDragListener(onDragListenerUserPic);
+            //container5.setOnDragListener(onDragListenerUserPic);
+            //container6.setOnDragListener(onDragListenerUserPic);
+
+            linearLayoutTest = (LinearLayout) findViewById(R.id.fullscreen);
+            //prendre tous les éléments de l'écran
+            for (int index = 0; index < (linearLayoutTest).getChildCount(); ++index) {
+                View nextChild = (linearLayoutTest).getChildAt(index);
+                //Si c'est un ScrollView
+                if (nextChild instanceof ScrollView) {
+                    scrollViewTest = (ScrollView) findViewById(nextChild.getId());
+                    //prendre tous les éléments des scrollviews
+                    for (int index2 = 0; index2 < (scrollViewTest).getChildCount(); ++index2) {
+                        View nextChild2 = (scrollViewTest).getChildAt(index2);
+                        //Si c'est un LinearLayout
+                        if (nextChild2 instanceof LinearLayout) {
+                            linearLayoutTest2 = (LinearLayout) findViewById(nextChild2.getId());
+                            //prendre tous les éléments du LinearLayout
+                            for (int index3 = 0; index3 < (linearLayoutTest2).getChildCount(); ++index3) {
+                                View nextChild3 = (linearLayoutTest2).getChildAt(index3);
+                                //Si c'est un RelativeLayout
+                                if (nextChild3 instanceof RelativeLayout) {
+                                    containertemp = (RelativeLayout) findViewById(nextChild3.getId());
+                                    containertemp.setOnLongClickListener(null);
+                                    containertemp.setOnDragListener(onDragListenerUserPic);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
             bleuRema.setOnLongClickListener(assigneUtilisateurORReminer);
             rougeRema.setOnLongClickListener(assigneUtilisateurORReminer);
@@ -427,19 +600,33 @@ public class MainActivity extends AppCompatActivity {
                         for(int indexR1=0; indexR1<(containertemp).getChildCount(); ++indexR1) {
                             View nextChildR1 = (containertemp).getChildAt(indexR1);
 
-
                             if (Objects.equals(String.valueOf(nextChildR1.getTag()), "deposeR")) {
                                 ImageView temp = new ImageView(MainActivity.this);
                                 linearLayoutTest = (LinearLayout) findViewById(nextChildR1.getId());
+
+                                switch (String.valueOf(imageViewtemp.getTag())){
+                                    case "bleuR":
+                                        recalculerReminer(linearLayoutTest, 4);
+                                        break;
+                                    case "rougeR":
+                                        recalculerReminer(linearLayoutTest, 10);
+                                        break;
+                                    case "vertR":
+                                        recalculerReminer(linearLayoutTest, 1);
+                                        break;
+                                    case "jauneR":
+                                        recalculerReminer(linearLayoutTest, 2);
+                                        break;
+                                }
                                 LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(30, 30);
 
-                                params1.setMargins(10,0,10,10);
+                                /*params1.setMargins(10,0,10,10);
                                 params1.height = 30;
                                 params1.width = 30;
 
                                 temp.setBackground(imageViewtemp.getBackground());
 
-                                linearLayoutTest.addView(temp, params1);
+                                linearLayoutTest.addView(temp, params1);*/
                             }
                         }
 
@@ -451,7 +638,6 @@ public class MainActivity extends AppCompatActivity {
                         if(nextChild.getTag() != imageViewtemp.getTag()) {
                             if (nextChild instanceof ImageView) {
                                 if (Objects.equals(String.valueOf(nextChild.getTag()), "unused") && ender == 0) {
-
                                     for(int indexx=0; indexx<(containertemp).getChildCount(); ++indexx) {
                                         View nextChildx = (containertemp).getChildAt(indexx);
                                         if (nextChildx instanceof ImageView) {
@@ -480,12 +666,39 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
-            container1.setOnLongClickListener(containerLongClickListener);
-            container2.setOnLongClickListener(containerLongClickListener);
-            container3.setOnLongClickListener(containerLongClickListener);
-            container4.setOnLongClickListener(containerLongClickListener);
-            container5.setOnLongClickListener(containerLongClickListener);
-            container6.setOnLongClickListener(containerLongClickListener);
+            linearLayoutTest = (LinearLayout) findViewById(R.id.fullscreen);
+            //prendre tous les éléments de l'écran
+            for (int index = 0; index < (linearLayoutTest).getChildCount(); ++index) {
+                View nextChild = (linearLayoutTest).getChildAt(index);
+                //Si c'est un ScrollView
+                if (nextChild instanceof ScrollView) {
+                    scrollViewTest = (ScrollView) findViewById(nextChild.getId());
+                    //prendre tous les éléments des scrollviews
+                    for (int index2 = 0; index2 < (scrollViewTest).getChildCount(); ++index2) {
+                        View nextChild2 = (scrollViewTest).getChildAt(index2);
+                        //Si c'est un LinearLayout
+                        if (nextChild2 instanceof LinearLayout) {
+                            linearLayoutTest2 = (LinearLayout) findViewById(nextChild2.getId());
+                            //prendre tous les éléments du LinearLayout
+                            for (int index3 = 0; index3 < (linearLayoutTest2).getChildCount(); ++index3) {
+                                View nextChild3 = (linearLayoutTest2).getChildAt(index3);
+                                //Si c'est un RelativeLayout
+                                if (nextChild3 instanceof RelativeLayout) {
+                                    containertemp = (RelativeLayout) findViewById(nextChild3.getId());
+                                    containertemp.setOnLongClickListener(containerLongClickListener);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            //container1.setOnLongClickListener(containerLongClickListener);
+            //container2.setOnLongClickListener(containerLongClickListener);
+            //container3.setOnLongClickListener(containerLongClickListener);
+            //container4.setOnLongClickListener(containerLongClickListener);
+            //container5.setOnLongClickListener(containerLongClickListener);
+            //container6.setOnLongClickListener(containerLongClickListener);
 
             return true;
         }
@@ -496,107 +709,289 @@ public class MainActivity extends AppCompatActivity {
 
     public void ajouterTachesDynamiquement(List<ContainerTache> listecontainer){
 
+        for(ContainerTache containerfl : listecontainer) {
+            creationContainer(containerfl);
+        }
+    }
+
+    public void creationContainer(ContainerTache container){
+
+
+        LinearLayout ttt;
+
         RelativeLayout construction = new RelativeLayout(this);
-        LinearLayout.LayoutParams paramsContainer = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        paramsContainer.setMargins(15,15,15,15);
-
-        construction.setLayoutParams(paramsContainer);
-        construction.setBackgroundResource(R.color.colorgris);
-        construction.setId(R.id.testidRL);
-
+        TextView tempText = new TextView(MainActivity.this);
         ImageView tempImageDY1 = new ImageView(MainActivity.this);
         ImageView tempImageDY2 = new ImageView(MainActivity.this);
         ImageView tempImageDY3 = new ImageView(MainActivity.this);
         ImageView tempImageDY4 = new ImageView(MainActivity.this);
-
-        TextView tempText = new TextView(MainActivity.this);
         LinearLayout linearTemp = new LinearLayout(MainActivity.this);
 
-        for(ContainerTache i : listecontainer) {
-            //Log.i("1", i.getEtatdelatache());
-            //Log.i("2", i.getTache());
-            //Log.i("3", String.valueOf(i.getRemaining()));
-            //Log.i("4", String.valueOf(i.getUtilisateurs()));
+        LinearLayout.LayoutParams paramsContainer = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        paramsContainer.setMargins(15,15,15,15);
+        construction.setLayoutParams(paramsContainer);
+        construction.setBackgroundResource(R.color.colorgris);
 
-            RelativeLayout.LayoutParams paramsImage1 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            paramsImage1.setMargins(4,4,4,4);
-            paramsImage1.height = 60;
-            paramsImage1.width = 60;
-            tempImageDY1.setBackgroundResource(R.drawable.helene);
-            tempImageDY1.setId(R.id.image1container1);
-
-            RelativeLayout.LayoutParams paramsImage2 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            paramsImage2.setMargins(4,4,4,4);
-            paramsImage2.height = 60;
-            paramsImage2.width = 60;
-            paramsImage2.addRule(RelativeLayout.BELOW, R.id.image1container1);
-            tempImageDY2.setBackgroundResource(R.drawable.poseidon);
-            tempImageDY2.setId(R.id.image2container1);
-
-            RelativeLayout.LayoutParams paramsImage3 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            paramsImage3.setMargins(4,4,4,4);
-            paramsImage3.height = 60;
-            paramsImage3.width = 60;
-            paramsImage3.addRule(RelativeLayout.BELOW, R.id.image2container1);
-            tempImageDY3.setBackgroundResource(R.drawable.helios);
-            tempImageDY3.setId(R.id.image3container1);
-
-            RelativeLayout.LayoutParams paramsImage4 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            paramsImage4.setMargins(4,4,4,4);
-            paramsImage4.height = 60;
-            paramsImage4.width = 60;
-            paramsImage4.addRule(RelativeLayout.BELOW, R.id.image3container1);
-            tempImageDY4.setBackgroundResource(R.drawable.hermes);
-            tempImageDY4.setId(R.id.image4container1);
+        RelativeLayout.LayoutParams paramsImage1 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        paramsImage1.setMargins(4,4,4,4);
+        paramsImage1.height = 60;
+        paramsImage1.width = 60;
+        tempImageDY1.setVisibility(View.GONE);
 
 
 
-            RelativeLayout.LayoutParams paramsText = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            paramsText.setMargins(10,10,10,10);
-            paramsText.addRule(RelativeLayout.RIGHT_OF, R.id.image1container1);
+        if(container.getUtilisateurs().size() > 0) {
 
-            tempText.setText(i.getTache());
-            tempText.setTextSize(2,15);
-            tempText.setEllipsize(TextUtils.TruncateAt.END);
-            tempText.setMaxLines(5);
-            tempText.setId(R.id.testidTV);
-
-            RelativeLayout.LayoutParams paramsLinearDepose = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            paramsLinearDepose.setMargins(10,10,10,10);
-            paramsLinearDepose.addRule(RelativeLayout.BELOW, R.id.testidTV);
-            paramsLinearDepose.addRule(RelativeLayout.RIGHT_OF, R.id.image1container1);
-            linearTemp.setTag("deposeR");
-            linearTemp.setOrientation(LinearLayout.HORIZONTAL);
-
-            if(i.getRemaining()<41){
-                ajouterReminerCorrespondant(linearTemp, Global.remainingsDistibution[i.getRemaining()]);
+            utilisateursList = (LinearLayout) findViewById(R.id.list_des_perso);
+            for (int index = 0; index < (utilisateursList).getChildCount(); ++index) {
+                View nextChild = (utilisateursList).getChildAt(index);
+                if (nextChild instanceof ImageView) {
+                    imageViewtemp = (ImageView) nextChild;
+                    if(String.valueOf(imageViewtemp.getTag()).equals(String.valueOf(container.getUtilisateurs().get(0)))){
+                        tempImageDY1.setImageDrawable(imageViewtemp.getDrawable());
+                        tempImageDY1.setTag(imageViewtemp.getTag());
+                    }
+                }
             }
-            else {
-                Toast.makeText(getApplicationContext(), "La tâche "+i.getTache()+" à un trop long remaining", Toast.LENGTH_LONG).show();
+            tempImageDY1.setVisibility(View.VISIBLE);
+        }else{
+            tempImageDY1.setTag("unused");
+        }
+
+
+
+        tempImageDY1.setId(Global.idImagelist.get(Global.incrementeurIDimage));
+        Global.incrementeurIDimage = Global.incrementeurIDimage + 1;
+
+        RelativeLayout.LayoutParams paramsImage2 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        paramsImage2.setMargins(4,4,4,4);
+        paramsImage2.height = 60;
+        paramsImage2.width = 60;
+        paramsImage2.addRule(RelativeLayout.BELOW, Global.idImagelist.get(Global.incrementeurIDimage - 1));
+        tempImageDY2.setVisibility(View.GONE);
+
+
+        if(container.getUtilisateurs().size() > 1) {
+            utilisateursList = (LinearLayout) findViewById(R.id.list_des_perso);
+            for (int index = 0; index < (utilisateursList).getChildCount(); ++index) {
+                View nextChild = (utilisateursList).getChildAt(index);
+                if (nextChild instanceof ImageView) {
+                    imageViewtemp = (ImageView) nextChild;
+                    if (String.valueOf(imageViewtemp.getTag()).equals(String.valueOf(container.getUtilisateurs().get(1)))) {
+                        tempImageDY2.setImageDrawable(imageViewtemp.getDrawable());
+                        tempImageDY2.setTag(imageViewtemp.getTag());
+                    }
+                }
             }
+            tempImageDY2.setVisibility(View.VISIBLE);
+        }else{
+            tempImageDY2.setTag("unused");
+        }
 
 
+        tempImageDY2.setId(Global.idImagelist.get(Global.incrementeurIDimage));
+        Global.incrementeurIDimage = Global.incrementeurIDimage + 1;
+
+        RelativeLayout.LayoutParams paramsImage3 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        paramsImage3.setMargins(4,4,4,4);
+        paramsImage3.height = 60;
+        paramsImage3.width = 60;
+        paramsImage3.addRule(RelativeLayout.BELOW, Global.idImagelist.get(Global.incrementeurIDimage - 1));
+        tempImageDY3.setVisibility(View.GONE);
 
 
-            construction.setId(R.id.testidRL);
-            construction.addView(tempImageDY1, paramsImage1);
-            construction.addView(tempImageDY2, paramsImage2);
-            construction.addView(tempImageDY3, paramsImage3);
-            construction.addView(tempImageDY4, paramsImage4);
-            construction.addView(tempText, paramsText);
-            construction.addView(linearTemp, paramsLinearDepose);
+        if(container.getUtilisateurs().size() > 2) {
+            utilisateursList = (LinearLayout) findViewById(R.id.list_des_perso);
+            for (int index = 0; index < (utilisateursList).getChildCount(); ++index) {
+                View nextChild = (utilisateursList).getChildAt(index);
+                if (nextChild instanceof ImageView) {
+                    imageViewtemp = (ImageView) nextChild;
+                    if(String.valueOf(imageViewtemp.getTag()).equals(String.valueOf(container.getUtilisateurs().get(2)))){
+                        tempImageDY3.setImageDrawable(imageViewtemp.getDrawable());
+                        tempImageDY3.setTag(imageViewtemp.getTag());
+                    }
+                }
+            }
+            tempImageDY3.setVisibility(View.VISIBLE);
+        }else{
+            tempImageDY3.setTag("unused");
+        }
 
-            LinearLayout ttt = (LinearLayout) findViewById(R.id.list_des_taches1);
+
+        tempImageDY3.setId(Global.idImagelist.get(Global.incrementeurIDimage));
+        Global.incrementeurIDimage = Global.incrementeurIDimage + 1;
+
+        RelativeLayout.LayoutParams paramsImage4 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        paramsImage4.setMargins(4,4,4,4);
+        paramsImage4.height = 60;
+        paramsImage4.width = 60;
+        paramsImage4.addRule(RelativeLayout.BELOW, Global.idImagelist.get(Global.incrementeurIDimage - 1));
+        tempImageDY4.setVisibility(View.GONE);
+
+
+        if(container.getUtilisateurs().size() > 3) {
+            utilisateursList = (LinearLayout) findViewById(R.id.list_des_perso);
+            for (int index = 0; index < (utilisateursList).getChildCount(); ++index) {
+                View nextChild = (utilisateursList).getChildAt(index);
+                if (nextChild instanceof ImageView) {
+                    imageViewtemp = (ImageView) nextChild;
+                    if(String.valueOf(imageViewtemp.getTag()).equals(String.valueOf(container.getUtilisateurs().get(3)))){
+                        tempImageDY4.setImageDrawable(imageViewtemp.getDrawable());
+                        tempImageDY4.setTag(imageViewtemp.getTag());
+                    }
+                }
+            }
+            tempImageDY4.setVisibility(View.VISIBLE);
+        }else{
+            tempImageDY4.setTag("unused");
+        }
+
+
+        tempImageDY4.setId(Global.idImagelist.get(Global.incrementeurIDimage));
+        Global.incrementeurIDimage = Global.incrementeurIDimage + 1;
+
+
+        RelativeLayout.LayoutParams paramsText = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        paramsText.setMargins(10,10,10,10);
+        paramsText.addRule(RelativeLayout.RIGHT_OF, Global.idImagelist.get(Global.incrementeurIDimage - 4));
+
+        tempText.setText(container.getTache());
+        tempText.setTextSize(2,15);
+        tempText.setEllipsize(TextUtils.TruncateAt.END);
+        tempText.setMaxLines(5);
+        tempText.setId(Global.idTextlist.get(Global.incrementeurIDtext));
+        Global.incrementeurIDtext = Global.incrementeurIDtext + 1;
+
+        RelativeLayout.LayoutParams paramsLinearDepose = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        paramsLinearDepose.setMargins(10,10,10,10);
+        paramsLinearDepose.addRule(RelativeLayout.BELOW, Global.idTextlist.get(Global.incrementeurIDtext - 1));
+        paramsLinearDepose.addRule(RelativeLayout.RIGHT_OF, Global.idImagelist.get(Global.incrementeurIDimage - 4));
+        linearTemp.setTag("deposeR");
+        linearTemp.setOrientation(LinearLayout.HORIZONTAL);
+        linearTemp.setId(Global.idLinearlist.get(Global.incrementeurIDlinear));
+        Global.incrementeurIDlinear = Global.incrementeurIDlinear + 1;
+
+        if(container.getRemaining()<41){
+            ajouterReminerCorrespondant(linearTemp, Global.remainingsDistibution[container.getRemaining()]);
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "La tâche "+container.getTache()+" à un trop long remaining", Toast.LENGTH_LONG).show();
+        }
+
+        construction.addView(tempImageDY1, paramsImage1);
+        construction.addView(tempImageDY2, paramsImage2);
+        construction.addView(tempImageDY3, paramsImage3);
+        construction.addView(tempImageDY4, paramsImage4);
+        construction.addView(tempText, paramsText);
+        construction.addView(linearTemp, paramsLinearDepose);
+
+        construction.setId(Global.idContainerlist.get(Global.incrementeurIDcontainer));
+        Global.incrementeurIDcontainer = Global.incrementeurIDcontainer + 1;
+
+        if(container.getEtatdelatache().equals("etat1")){
+            ttt = (LinearLayout) findViewById(R.id.list_des_taches1);
+            ttt.addView(construction);
+        }
+        if(container.getEtatdelatache().equals("etat2")){
+            ttt = (LinearLayout) findViewById(R.id.list_des_taches2);
+            ttt.addView(construction);
+        }
+        if(container.getEtatdelatache().equals("etat3")){
+            ttt = (LinearLayout) findViewById(R.id.list_des_taches3);
             ttt.addView(construction);
         }
 
     }
 
     public void ajouterReminerCorrespondant(LinearLayout layout, String reminerDistribution){
+
+        //region gestion reminer
         String[] parts = reminerDistribution.split(",");
+        Integer i = 0;
+
+        layout.removeAllViews();
+
+        ImageView temp;
+
+        ImageView temp1 = new ImageView(MainActivity.this);
+        ImageView temp2 = new ImageView(MainActivity.this);
+        ImageView temp3 = new ImageView(MainActivity.this);
+        ImageView temp4 = new ImageView(MainActivity.this);
+        ImageView temp5 = new ImageView(MainActivity.this);
+        ImageView temp6 = new ImageView(MainActivity.this);
+
+        List<ImageView> listIV = new ArrayList<>();
+        listIV.add(temp1);
+        listIV.add(temp2);
+        listIV.add(temp3);
+        listIV.add(temp4);
+        listIV.add(temp5);
+        listIV.add(temp6);
+
+        LinearLayout.LayoutParams paramsReminer = new LinearLayout.LayoutParams(30, 30);
+
+        paramsReminer.setMargins(10,0,10,10);
+        paramsReminer.height = 30;
+        paramsReminer.width = 30;
 
         for(String couleur : parts){
-            Log.i("couleur", couleur);
+            temp = listIV.get(i);
+            i++;
+            switch (couleur){
+                case "bleu":
+                    temp.setBackgroundColor(ContextCompat.getColor(this, R.color.bleuremaining));
+                    temp.setTag("bleuR");
+                    layout.addView(temp, paramsReminer);
+                    break;
+                case "vert":
+                    temp.setBackgroundColor(ContextCompat.getColor(this, R.color.vertremaining));
+                    temp.setTag("vertR");
+                    layout.addView(temp, paramsReminer);
+                    break;
+                case "jaune":
+                    temp.setBackgroundColor(ContextCompat.getColor(this, R.color.jauneremaining));
+                    temp.setTag("jauneR");
+                    layout.addView(temp, paramsReminer);
+                    break;
+                case "rouge":
+                    temp.setBackgroundColor(ContextCompat.getColor(this, R.color.rougeremaining));
+                    temp.setTag("rougeR");
+                    layout.addView(temp, paramsReminer);
+                    break;
+            }
         }
+        //endregion
+    }
+
+    public void recalculerReminer(LinearLayout layout, Integer valuetoadd){
+
+        Integer valuework=0;
+        String distribution;
+
+        valuework=valuework+valuetoadd;
+
+        for(int index=0; index<(layout).getChildCount(); ++index) {
+            View nextChild = (layout).getChildAt(index);
+            if (nextChild instanceof ImageView) {
+                switch (String.valueOf(nextChild.getTag())){
+                    case "bleuR":
+                        valuework=valuework+4;
+                        break;
+                    case "rougeR":
+                        valuework=valuework+10;
+                        break;
+                    case "vertR":
+                        valuework=valuework+1;
+                        break;
+                    case "jauneR":
+                        valuework=valuework+2;
+                        break;
+                }
+            }
+        }
+        distribution = Global.remainingsDistibution[valuework];
+        Log.i("final", String.valueOf(valuework));
+        Log.i("final", distribution);
+        ajouterReminerCorrespondant(layout, distribution);
     }
 }

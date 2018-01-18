@@ -18,6 +18,18 @@ public class Global {
             "rouge,rouge,rouge,bleu", "rouge,rouge,rouge,bleu,vert", "rouge,rouge,rouge,bleu,jaune", "rouge,rouge,bleu,jaune,vert", "rouge,rouge,rouge,bleu,bleu",
             "rouge,rouge,rouge,bleu,bleu,vert", "rouge,rouge,rouge,rouge"};
 
+    public static List<Integer> idImagelist = new ArrayList<Integer>();
+    public static Integer incrementeurIDimage = 0;
+
+    public static List<Integer> idTextlist = new ArrayList<Integer>();
+    public static Integer incrementeurIDtext = 0;
+
+    public static List<Integer> idContainerlist = new ArrayList<Integer>();
+    public static Integer incrementeurIDcontainer = 0;
+
+    public static List<Integer> idLinearlist = new ArrayList<Integer>();
+    public static Integer incrementeurIDlinear = 0;
+
     public static List<ContainerTache> listecontainer = new ArrayList<ContainerTache>();
 
 

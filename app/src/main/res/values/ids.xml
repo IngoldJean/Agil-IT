@@ -1,11 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="testidRL" type="id"/>
-    <item name="testidIV" type="id"/>
-    <item name="testidTV" type="id"/>
 
-    <item name="image1container1" type="id"/>
-    <item name="image2container1" type="id"/>
-    <item name="image3container1" type="id"/>
-    <item name="image4container1" type="id"/>
+    <item name="IVid1" type="id"/>
+    <item name="IVid2" type="id"/>
+    <item name="IVid3" type="id"/>
+    <item name="IVid4" type="id"/>
+    <item name="IVid5" type="id"/>
+    <item name="IVid6" type="id"/>
+    <item name="IVid7" type="id"/>
+    <item name="IVid8" type="id"/>
+    <item name="IVid9" type="id"/>
+    <item name="IVid10" type="id"/>
+    <item name="IVid11" type="id"/>
+    <item name="IVid12" type="id"/>
+    <item name="IVid13" type="id"/>
+    <item name="IVid14" type="id"/>
+    <item name="IVid15" type="id"/>
+    <item name="IVid16" type="id"/>
+    <item name="IVid17" type="id"/>
+    <item name="IVid18" type="id"/>
+    <item name="IVid19" type="id"/>
+    <item name="IVid20" type="id"/>
+    <item name="IVid21" type="id"/>
+    <item name="IVid22" type="id"/>
+    <item name="IVid23" type="id"/>
+    <item name="IVid24" type="id"/>
+
+    <item name="TVid1" type="id"/>
+    <item name="TVid2" type="id"/>
+    <item name="TVid3" type="id"/>
+    <item name="TVid4" type="id"/>
+    <item name="TVid5" type="id"/>
+    <item name="TVid6" type="id"/>
+
+    <item name="Containerid1" type="id"/>
+    <item name="Containerid2" type="id"/>
+    <item name="Containerid3" type="id"/>
+    <item name="Containerid4" type="id"/>
+    <item name="Containerid5" type="id"/>
+    <item name="Containerid6" type="id"/>
+
+    <item name="Linearid1" type="id"/>
+    <item name="Linearid2" type="id"/>
+    <item name="Linearid3" type="id"/>
+    <item name="Linearid4" type="id"/>
+    <item name="Linearid5" type="id"/>
+    <item name="Linearid6" type="id"/>
+
 </resources>
