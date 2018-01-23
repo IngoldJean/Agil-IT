@@ -15,7 +15,7 @@ public class Global {
             "rouge,bleu,jaune,vert", "rouge,bleu,bleu", "rouge,bleu,bleu,vert", "rouge,rouge", "rouge,rouge,vert", "rouge,rouge,jaune", "rouge,rouge,jaune,vert",
             "rouge,rouge,bleu", "rouge,rouge,bleu,vert", "rouge,rouge,bleu,jaune", "rouge,rouge,bleu,jaune,vert", "rouge,rouge,bleu,bleu",
             "rouge,rouge,bleu,bleu,vert", "rouge,rouge,rouge", "rouge,rouge,rouge,vert", "rouge,rouge,rouge,jaune", "rouge,rouge,rouge,jaune,vert",
-            "rouge,rouge,rouge,bleu", "rouge,rouge,rouge,bleu,vert", "rouge,rouge,rouge,bleu,jaune", "rouge,rouge,bleu,jaune,vert", "rouge,rouge,rouge,bleu,bleu",
+            "rouge,rouge,rouge,bleu", "rouge,rouge,rouge,bleu,vert", "rouge,rouge,rouge,bleu,jaune", "rouge,rouge,rouge,bleu,jaune,vert", "rouge,rouge,rouge,bleu,bleu",
             "rouge,rouge,rouge,bleu,bleu,vert", "rouge,rouge,rouge,rouge"};
 
     public static List<Integer> idImagelist = new ArrayList<Integer>();

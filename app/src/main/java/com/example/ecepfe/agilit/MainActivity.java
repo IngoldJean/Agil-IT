@@ -23,18 +23,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class MainActivity extends AppCompatActivity {
 
     ScrollView zonededrop1, zonededrop2, zonededrop3, scrollViewTest;
     LinearLayout linearLayoutTest, linearLayoutTest2, utilisateursList;
-    TextView textcont1, textcont2, textcont3, textcont4, textcont5, textcont6, texttemp;
+    TextView texttemp;
     ImageView picutilisateur1, picutilisateur2, picutilisateur3, picutilisateur4, picutilisateur5, picutilisateur6, imageViewtemp, imageViewtemp2, imageViewtemp3, vertRema, bleuRema, jauneRema, rougeRema;
-    //RelativeLayout container1, container2, container3, container4, container5, container6;
     RelativeLayout containertemp, containertemp2, containertemppopup;
     ContainerTache testcontainer = new ContainerTache();
     ContainerTache testcontainer2 = new ContainerTache();
     ContainerTache testcontainer3 = new ContainerTache();
+    ContainerTache testcontainerfromserver = new ContainerTache();
+
+    private MyApiEndpointInterface apiInterface;
+    private Fields fieldstemp;
+    private Example exampletemp;
+    private Issuetype issuetypetemp;
+    private Assignee assigneetemp;
+    private Status statustemp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,20 +112,6 @@ public class MainActivity extends AppCompatActivity {
         zonededrop2 = (ScrollView) findViewById(R.id.zonedrop2);
         zonededrop3 = (ScrollView) findViewById(R.id.zonedrop3);
 
-        /*container1 = (RelativeLayout) findViewById(R.id.container1);
-        container2 = (RelativeLayout) findViewById(R.id.container2);
-        container3 = (RelativeLayout) findViewById(R.id.container3);
-        container4 = (RelativeLayout) findViewById(R.id.container4);
-        container5 = (RelativeLayout) findViewById(R.id.container5);
-        container6 = (RelativeLayout) findViewById(R.id.container6);*/
-
-        textcont1 = (TextView) findViewById(R.id.contenertext1);
-        textcont2 = (TextView) findViewById(R.id.contenertext2);
-        textcont3 = (TextView) findViewById(R.id.contenertext3);
-        textcont4 = (TextView) findViewById(R.id.contenertext4);
-        textcont5 = (TextView) findViewById(R.id.contenertext5);
-        textcont6 = (TextView) findViewById(R.id.contenertext6);
-
         picutilisateur1 = (ImageView) findViewById(R.id.picutilisateur1);
         picutilisateur2 = (ImageView) findViewById(R.id.picutilisateur2);
         picutilisateur3 = (ImageView) findViewById(R.id.picutilisateur3);
@@ -129,19 +126,6 @@ public class MainActivity extends AppCompatActivity {
         //endregion
 
         //region Listenerisation
-        /*container1.setOnLongClickListener(containerLongClickListener);
-        container2.setOnLongClickListener(containerLongClickListener);
-        container3.setOnLongClickListener(containerLongClickListener);
-        container4.setOnLongClickListener(containerLongClickListener);
-        container5.setOnLongClickListener(containerLongClickListener);
-        container6.setOnLongClickListener(containerLongClickListener);
-
-        container1.setOnClickListener(affichagepopupdisplaycontent);
-        container2.setOnClickListener(affichagepopupdisplaycontent);
-        container3.setOnClickListener(affichagepopupdisplaycontent);
-        container4.setOnClickListener(affichagepopupdisplaycontent);
-        container5.setOnClickListener(affichagepopupdisplaycontent);
-        container6.setOnClickListener(affichagepopupdisplaycontent);*/
 
         picutilisateur1.setOnLongClickListener(assigneUtilisateurORReminer);
         picutilisateur2.setOnLongClickListener(assigneUtilisateurORReminer);
@@ -208,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
 
         ajouterTachesDynamiquement(Global.listecontainer);
 
+        //region Listenerisation modulable
         linearLayoutTest = (LinearLayout) findViewById(R.id.fullscreen);
         //prendre tous les éléments de l'écran
         for (int index = 0; index < (linearLayoutTest).getChildCount(); ++index) {
@@ -235,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+        //endregion
     }
 
 
@@ -399,20 +385,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            /*container1.setOnDragListener(null);
-            container2.setOnDragListener(null);
-            container3.setOnDragListener(null);
-            container4.setOnDragListener(null);
-            container5.setOnDragListener(null);
-            container6.setOnDragListener(null);
-
-            container1.setOnLongClickListener(containerLongClickListener);
-            container2.setOnLongClickListener(containerLongClickListener);
-            container3.setOnLongClickListener(containerLongClickListener);
-            container4.setOnLongClickListener(containerLongClickListener);
-            container5.setOnLongClickListener(containerLongClickListener);
-            container6.setOnLongClickListener(containerLongClickListener);*/
-
             zonededrop1.setOnDragListener(onDragListener);
             zonededrop2.setOnDragListener(onDragListener);
             zonededrop3.setOnDragListener(onDragListener);
@@ -434,20 +406,6 @@ public class MainActivity extends AppCompatActivity {
             zonededrop1.setOnDragListener(null);
             zonededrop2.setOnDragListener(null);
             zonededrop3.setOnDragListener(null);
-
-            //container1.setOnLongClickListener(null);
-            //container2.setOnLongClickListener(null);
-            //container3.setOnLongClickListener(null);
-            //container4.setOnLongClickListener(null);
-            //container5.setOnLongClickListener(null);
-            //container6.setOnLongClickListener(null);
-
-            //container1.setOnDragListener(onDragListenerUserPic);
-            //container2.setOnDragListener(onDragListenerUserPic);
-            //container3.setOnDragListener(onDragListenerUserPic);
-            //container4.setOnDragListener(onDragListenerUserPic);
-            //container5.setOnDragListener(onDragListenerUserPic);
-            //container6.setOnDragListener(onDragListenerUserPic);
 
             linearLayoutTest = (LinearLayout) findViewById(R.id.fullscreen);
             //prendre tous les éléments de l'écran
@@ -620,13 +578,6 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(30, 30);
 
-                                /*params1.setMargins(10,0,10,10);
-                                params1.height = 30;
-                                params1.width = 30;
-
-                                temp.setBackground(imageViewtemp.getBackground());
-
-                                linearLayoutTest.addView(temp, params1);*/
                             }
                         }
 
@@ -692,14 +643,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-
-            //container1.setOnLongClickListener(containerLongClickListener);
-            //container2.setOnLongClickListener(containerLongClickListener);
-            //container3.setOnLongClickListener(containerLongClickListener);
-            //container4.setOnLongClickListener(containerLongClickListener);
-            //container5.setOnLongClickListener(containerLongClickListener);
-            //container6.setOnLongClickListener(containerLongClickListener);
-
             return true;
         }
     };
@@ -715,7 +658,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void creationContainer(ContainerTache container){
-
 
         LinearLayout ttt;
 
@@ -989,9 +931,51 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        distribution = Global.remainingsDistibution[valuework];
-        Log.i("final", String.valueOf(valuework));
-        Log.i("final", distribution);
-        ajouterReminerCorrespondant(layout, distribution);
+        if(valuework<41) {
+            distribution = Global.remainingsDistibution[valuework];
+            Log.i("final", String.valueOf(valuework));
+            Log.i("final", distribution);
+            ajouterReminerCorrespondant(layout, distribution);
+        }else {
+            Toast.makeText(this,"Remining spérieur à 20 jours!",Toast.LENGTH_LONG).show();
+        }
+
     }
+
+    public void testcallApi(View view){
+        apiInterface = RetrofitBuilder.getRetrofitBuilder().create(MyApiEndpointInterface.class);
+
+        Call<Example> call = apiInterface.getAllData();
+
+        call.enqueue(new Callback<Example>() {
+            @Override
+            public void onResponse(Call<Example> call, Response<Example> response) {
+                Log.i("test", "sucess");
+
+                exampletemp = response.body();
+
+                fieldstemp = exampletemp.getFields();
+
+                issuetypetemp = fieldstemp.getIssuetype();
+
+                assigneetemp = fieldstemp.getAssignee();
+
+                statustemp = fieldstemp.getStatus();
+
+
+                Log.i("Timeremaining", String.valueOf(fieldstemp.getTimeestimate()));
+                Log.i("Description", String.valueOf(issuetypetemp.getDescription()));
+                Log.i("Assigne", assigneetemp.getName());
+                Log.i("Status", statustemp.getName());
+
+            }
+
+            @Override
+            public void onFailure(Call<Example> call, Throwable t) {
+                Log.i("test", "fail");
+                Log.i("ERROR", t.getMessage());
+            }
+        });
+    }
+
 }
