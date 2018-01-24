@@ -1,520 +1,547 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:id="@+id/fullscreen"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
-        android:layout_width="320dp"
-        android:layout_height="match_parent"
-        android:id="@+id/zonedrop1"
-        android:background="@color/colorPrimaryDark">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/list_des_taches1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:textSize="40sp"
-                android:background="@color/blanc"
-                android:text="To-do"/>
-
-            <!--<RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/container1"
-                android:background="@color/colorgris"
-                android:layout_margin="4dp">
-
-                <ImageView
-                    android:id="@+id/unused10"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="4dp"
-                    android:visibility="gone"
-                    android:tag="unused" />
-
-                <ImageView
-                    android:id="@+id/unused11"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="4dp"
-                    android:visibility="gone"
-                    android:layout_below="@id/unused10"
-                    android:tag="unused"/>
-
-                <ImageView
-                    android:id="@+id/unused12"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="4dp"
-                    android:visibility="gone"
-                    android:layout_below="@id/unused11"
-                    android:tag="unused"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:id="@+id/contenertext1"
-                    android:layout_toEndOf="@id/unused10"
-                    android:ellipsize="end"
-                    android:maxLines="5"
-                    android:text="Nous marquons ici le premier texte qui sera affichage via le click dessus dans une magnifique popup"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_below="@id/contenertext1"
-                    android:layout_toEndOf="@id/unused10"
-                    android:id="@+id/deposeR1"
-                    android:tag="deposeR">
-                </LinearLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/container2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:background="@color/colorgris">
-
-                <ImageView
-                    android:id="@+id/unused20"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="4dp"
-                    android:tag="unused"
-                    android:visibility="gone" />
-
-                <ImageView
-                    android:id="@+id/unused21"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_below="@id/unused20"
-                    android:layout_margin="4dp"
-                    android:tag="unused"
-                    android:visibility="gone" />
-
-                <ImageView
-                    android:id="@+id/unused22"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_below="@id/unused21"
-                    android:layout_margin="4dp"
-                    android:tag="unused"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:id="@+id/contenertext2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_toEndOf="@id/unused20"
-                    android:ellipsize="end"
-                    android:maxLines="5"
-                    android:text="I need to get reference to separate XML file wich is FrameLayout but I can't figure out how to do it ,this code doesn't work: " />
-
-                <LinearLayout
-                    android:id="@+id/deposeR2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/contenertext2"
-                    android:layout_toEndOf="@id/unused20"
-                    android:orientation="horizontal"
-                    android:tag="deposeR">
-                </LinearLayout>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/container3"
-                android:background="@color/colorgris"
-                android:layout_margin="4dp">
-
-                <ImageView
-                    android:id="@+id/unused30"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="4dp"
-                    android:visibility="gone"
-                    android:tag="unused" />
-
-                <ImageView
-                    android:id="@+id/unused31"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="4dp"
-                    android:visibility="gone"
-                    android:layout_below="@id/unused30"
-                    android:tag="unused"/>
-
-                <ImageView
-                    android:id="@+id/unused32"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="4dp"
-                    android:visibility="gone"
-                    android:layout_below="@id/unused31"
-                    android:tag="unused"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/contenertext3"
-                    android:layout_margin="10dp"
-                    android:layout_toEndOf="@id/unused30"
-                    android:ellipsize="end"
-                    android:maxLines="5"
-                    android:text="Using RelativeLayout, you can align two elements by right border, or make one below another, centered in the screen, centered left, and so on. By default, all child views are drawn at the top-left of the layout, so you must define the position of each view using the various layout properties available from"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_below="@id/contenertext3"
-                    android:layout_toEndOf="@id/unused30"
-                    android:id="@+id/deposeR3"
-                    android:tag="deposeR">
-                </LinearLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/container4"
-                android:background="@color/colorgris"
-                android:layout_margin="4dp">
-
-                <ImageView
-                    android:id="@+id/unused40"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="4dp"
-                    android:visibility="gone"
-                    android:tag="unused" />
-
-                <ImageView
-                    android:id="@+id/unused41"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="4dp"
-                    android:visibility="gone"
-                    android:layout_below="@id/unused40"
-                    android:tag="unused"/>
-
-                <ImageView
-                    android:id="@+id/unused42"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="4dp"
-                    android:visibility="gone"
-                    android:layout_below="@id/unused41"
-                    android:tag="unused"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/contenertext4"
-                    android:layout_toEndOf="@id/unused40"
-                    android:layout_margin="10dp"
-                    android:ellipsize="end"
-                    android:maxLines="5"
-                    android:text="Makes the bottom edge of this view match the bottom edge of the given anchor view ID and must be a reference to another resource, in the form "/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_below="@id/contenertext4"
-                    android:layout_toEndOf="@id/unused40"
-                    android:id="@+id/deposeR4"
-                    android:tag="deposeR">
-                </LinearLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/container5"
-                android:background="@color/colorgris"
-                android:layout_margin="4dp">
-
-                <ImageView
-                    android:id="@+id/unused50"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="4dp"
-                    android:visibility="gone"
-                    android:tag="unused" />
-
-                <ImageView
-                    android:id="@+id/unused51"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="4dp"
-                    android:visibility="gone"
-                    android:layout_below="@id/unused50"
-                    android:tag="unused"/>
-
-                <ImageView
-                    android:id="@+id/unused52"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="4dp"
-                    android:visibility="gone"
-                    android:layout_below="@id/unused51"
-                    android:tag="unused"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/contenertext5"
-                    android:layout_toRightOf="@id/unused50"
-                    android:layout_margin="10dp"
-                    android:ellipsize="end"
-                    android:maxLines="5"
-                    android:text="This example will take you through simple steps to show how to create your own Android application using Relative Layout. Follow the following steps to modify the Android application we created in Hello World Example chapter"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_below="@id/contenertext5"
-                    android:layout_toEndOf="@id/unused50"
-                    android:id="@+id/deposeR5"
-                    android:tag="deposeR">
-                </LinearLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/container6"
-                android:background="@color/colorgris"
-                android:layout_margin="4dp">
-
-                <ImageView
-                    android:id="@+id/unused60"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="4dp"
-                    android:visibility="gone"
-                    android:tag="unused" />
-
-                <ImageView
-                    android:id="@+id/unused61"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="4dp"
-                    android:visibility="gone"
-                    android:layout_below="@id/unused60"
-                    android:tag="unused"/>
-
-                <ImageView
-                    android:id="@+id/unused62"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="4dp"
-                    android:visibility="gone"
-                    android:layout_below="@id/unused61"
-                    android:tag="unused"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/contenertext6"
-                    android:layout_toRightOf="@id/unused60"
-                    android:layout_margin="10dp"
-                    android:ellipsize="end"
-                    android:maxLines="5"
-                    android:text="Let's try to run our modified Hello World! application we just modified. I assume you had created your AVD while doing environment setup. To run the app from Android Studio, open one of your project's activity"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_below="@id/contenertext6"
-                    android:layout_toEndOf="@id/unused60"
-                    android:id="@+id/deposeR6"
-                    android:tag="deposeR">
-                </LinearLayout>
-            </RelativeLayout>-->
-
-        </LinearLayout>
-
-    </ScrollView>
-
-    <ScrollView
-        android:id="@+id/zonedrop2"
-        android:layout_width="320dp"
-        android:layout_height="match_parent"
-        android:background="@color/colorAccent">
-
-        <LinearLayout
-            android:id="@+id/list_des_taches2"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@color/blanc"
-                android:gravity="center"
-                android:text="In progress"
-                android:textAlignment="center"
-                android:textSize="40sp" />
-
-        </LinearLayout>
-
-    </ScrollView>
-
-    <ScrollView
-        android:id="@+id/zonedrop3"
-        android:layout_width="320dp"
-        android:layout_height="match_parent"
-        android:background="@color/color3">
-
-        <LinearLayout
-            android:id="@+id/list_des_taches3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="center"
-                android:background="@color/blanc"
-                android:text="Done"
-                android:textAlignment="center"
-                android:textSize="40sp" />
-
-        </LinearLayout>
-
-    </ScrollView>
-
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/personnage"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/fullscreen">
+
+        <ScrollView
+            android:layout_width="320dp"
+            android:layout_height="match_parent"
+            android:id="@+id/zonedrop1"
+            android:background="@color/colorPrimaryDark">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/list_des_taches1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textSize="40sp"
+                    android:background="@color/blanc"
+                    android:text="To-do"/>
+
+                <!--<RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/container1"
+                    android:background="@color/colorgris"
+                    android:layout_margin="4dp">
+
+                    <ImageView
+                        android:id="@+id/unused10"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="4dp"
+                        android:visibility="gone"
+                        android:tag="unused" />
+
+                    <ImageView
+                        android:id="@+id/unused11"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="4dp"
+                        android:visibility="gone"
+                        android:layout_below="@id/unused10"
+                        android:tag="unused"/>
+
+                    <ImageView
+                        android:id="@+id/unused12"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="4dp"
+                        android:visibility="gone"
+                        android:layout_below="@id/unused11"
+                        android:tag="unused"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:id="@+id/contenertext1"
+                        android:layout_toEndOf="@id/unused10"
+                        android:ellipsize="end"
+                        android:maxLines="5"
+                        android:text="Nous marquons ici le premier texte qui sera affichage via le click dessus dans une magnifique popup"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_below="@id/contenertext1"
+                        android:layout_toEndOf="@id/unused10"
+                        android:id="@+id/deposeR1"
+                        android:tag="deposeR">
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/container2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:background="@color/colorgris">
+
+                    <ImageView
+                        android:id="@+id/unused20"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="4dp"
+                        android:tag="unused"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/unused21"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_below="@id/unused20"
+                        android:layout_margin="4dp"
+                        android:tag="unused"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/unused22"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_below="@id/unused21"
+                        android:layout_margin="4dp"
+                        android:tag="unused"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/contenertext2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_toEndOf="@id/unused20"
+                        android:ellipsize="end"
+                        android:maxLines="5"
+                        android:text="I need to get reference to separate XML file wich is FrameLayout but I can't figure out how to do it ,this code doesn't work: " />
+
+                    <LinearLayout
+                        android:id="@+id/deposeR2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/contenertext2"
+                        android:layout_toEndOf="@id/unused20"
+                        android:orientation="horizontal"
+                        android:tag="deposeR">
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/container3"
+                    android:background="@color/colorgris"
+                    android:layout_margin="4dp">
+
+                    <ImageView
+                        android:id="@+id/unused30"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="4dp"
+                        android:visibility="gone"
+                        android:tag="unused" />
+
+                    <ImageView
+                        android:id="@+id/unused31"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="4dp"
+                        android:visibility="gone"
+                        android:layout_below="@id/unused30"
+                        android:tag="unused"/>
+
+                    <ImageView
+                        android:id="@+id/unused32"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="4dp"
+                        android:visibility="gone"
+                        android:layout_below="@id/unused31"
+                        android:tag="unused"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/contenertext3"
+                        android:layout_margin="10dp"
+                        android:layout_toEndOf="@id/unused30"
+                        android:ellipsize="end"
+                        android:maxLines="5"
+                        android:text="Using RelativeLayout, you can align two elements by right border, or make one below another, centered in the screen, centered left, and so on. By default, all child views are drawn at the top-left of the layout, so you must define the position of each view using the various layout properties available from"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_below="@id/contenertext3"
+                        android:layout_toEndOf="@id/unused30"
+                        android:id="@+id/deposeR3"
+                        android:tag="deposeR">
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/container4"
+                    android:background="@color/colorgris"
+                    android:layout_margin="4dp">
+
+                    <ImageView
+                        android:id="@+id/unused40"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="4dp"
+                        android:visibility="gone"
+                        android:tag="unused" />
+
+                    <ImageView
+                        android:id="@+id/unused41"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="4dp"
+                        android:visibility="gone"
+                        android:layout_below="@id/unused40"
+                        android:tag="unused"/>
+
+                    <ImageView
+                        android:id="@+id/unused42"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="4dp"
+                        android:visibility="gone"
+                        android:layout_below="@id/unused41"
+                        android:tag="unused"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/contenertext4"
+                        android:layout_toEndOf="@id/unused40"
+                        android:layout_margin="10dp"
+                        android:ellipsize="end"
+                        android:maxLines="5"
+                        android:text="Makes the bottom edge of this view match the bottom edge of the given anchor view ID and must be a reference to another resource, in the form "/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_below="@id/contenertext4"
+                        android:layout_toEndOf="@id/unused40"
+                        android:id="@+id/deposeR4"
+                        android:tag="deposeR">
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/container5"
+                    android:background="@color/colorgris"
+                    android:layout_margin="4dp">
+
+                    <ImageView
+                        android:id="@+id/unused50"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="4dp"
+                        android:visibility="gone"
+                        android:tag="unused" />
+
+                    <ImageView
+                        android:id="@+id/unused51"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="4dp"
+                        android:visibility="gone"
+                        android:layout_below="@id/unused50"
+                        android:tag="unused"/>
+
+                    <ImageView
+                        android:id="@+id/unused52"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="4dp"
+                        android:visibility="gone"
+                        android:layout_below="@id/unused51"
+                        android:tag="unused"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/contenertext5"
+                        android:layout_toRightOf="@id/unused50"
+                        android:layout_margin="10dp"
+                        android:ellipsize="end"
+                        android:maxLines="5"
+                        android:text="This example will take you through simple steps to show how to create your own Android application using Relative Layout. Follow the following steps to modify the Android application we created in Hello World Example chapter"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_below="@id/contenertext5"
+                        android:layout_toEndOf="@id/unused50"
+                        android:id="@+id/deposeR5"
+                        android:tag="deposeR">
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/container6"
+                    android:background="@color/colorgris"
+                    android:layout_margin="4dp">
+
+                    <ImageView
+                        android:id="@+id/unused60"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="4dp"
+                        android:visibility="gone"
+                        android:tag="unused" />
+
+                    <ImageView
+                        android:id="@+id/unused61"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="4dp"
+                        android:visibility="gone"
+                        android:layout_below="@id/unused60"
+                        android:tag="unused"/>
+
+                    <ImageView
+                        android:id="@+id/unused62"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="4dp"
+                        android:visibility="gone"
+                        android:layout_below="@id/unused61"
+                        android:tag="unused"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/contenertext6"
+                        android:layout_toRightOf="@id/unused60"
+                        android:layout_margin="10dp"
+                        android:ellipsize="end"
+                        android:maxLines="5"
+                        android:text="Let's try to run our modified Hello World! application we just modified. I assume you had created your AVD while doing environment setup. To run the app from Android Studio, open one of your project's activity"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_below="@id/contenertext6"
+                        android:layout_toEndOf="@id/unused60"
+                        android:id="@+id/deposeR6"
+                        android:tag="deposeR">
+                    </LinearLayout>
+                </RelativeLayout>-->
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <ScrollView
+            android:id="@+id/zonedrop2"
+            android:layout_width="320dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent">
+
+            <LinearLayout
+                android:id="@+id/list_des_taches2"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/blanc"
+                    android:gravity="center"
+                    android:text="In progress"
+                    android:textAlignment="center"
+                    android:textSize="40sp" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <ScrollView
+            android:id="@+id/zonedrop3"
+            android:layout_width="320dp"
+            android:layout_height="match_parent"
+            android:background="@color/color3">
+
+            <LinearLayout
+                android:id="@+id/list_des_taches3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:background="@color/blanc"
+                    android:text="Done"
+                    android:textAlignment="center"
+                    android:textSize="40sp" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/personnage"
+            android:background="@color/blanc">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/list_des_perso"
+                android:orientation="vertical"
+                android:layout_marginTop="60dp"
+                android:gravity="center"
+                android:baselineAligned="false">
+
+
+                <ImageView
+                    android:id="@+id/picutilisateur1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="2dp"
+                    android:src="@drawable/helene"
+                    android:tag="utilisateur1" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/picutilisateur2"
+                    android:layout_margin="2dp"
+                    android:tag="utilisateur2"
+                    android:src="@drawable/helios"/>
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/picutilisateur3"
+                    android:layout_margin="2dp"
+                    android:tag="utilisateur3"
+                    android:src="@drawable/hermes"/>
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/picutilisateur4"
+                    android:layout_margin="2dp"
+                    android:tag="utilisateur4"
+                    android:src="@drawable/poseidon"/>
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/picutilisateur5"
+                    android:layout_margin="2dp"
+                    android:tag="utilisateur5"
+                    android:src="@drawable/pan"/>
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/picutilisateur6"
+                    android:layout_margin="2dp"
+                    android:tag="utilisateur6"
+                    android:src="@drawable/midas"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/IVvertRema"
+                    android:tag="vertR"
+                    android:layout_marginTop="50dp"
+                    android:layout_gravity="center"
+                    android:background="@color/vertremaining"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/IVbleuRema"
+                    android:tag="bleuR"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:background="@color/bleuremaining"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/IVjauneRema"
+                    android:tag="jauneR"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:background="@color/jauneremaining"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/IVrougeRema"
+                    android:tag="rougeR"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="center"
+                    android:background="@color/rougeremaining"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ADD"
+                    android:onClick="testcallApi"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
         android:background="@color/blanc">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/list_des_perso"
-            android:orientation="vertical"
-            android:layout_marginTop="60dp"
-            android:gravity="center"
-            android:baselineAligned="false">
+            android:layout_marginStart="20dp"
+            android:id="@+id/hours"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mmmmmm"/>
 
 
-            <ImageView
-                android:id="@+id/picutilisateur1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="2dp"
-                android:src="@drawable/helene"
-                android:tag="utilisateur1" />
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/picutilisateur2"
-                android:layout_margin="2dp"
-                android:tag="utilisateur2"
-                android:src="@drawable/helios"/>
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/picutilisateur3"
-                android:layout_margin="2dp"
-                android:tag="utilisateur3"
-                android:src="@drawable/hermes"/>
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/picutilisateur4"
-                android:layout_margin="2dp"
-                android:tag="utilisateur4"
-                android:src="@drawable/poseidon"/>
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/picutilisateur5"
-                android:layout_margin="2dp"
-                android:tag="utilisateur5"
-                android:src="@drawable/pan"/>
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/picutilisateur6"
-                android:layout_margin="2dp"
-                android:tag="utilisateur6"
-                android:src="@drawable/midas"/>
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:id="@+id/IVvertRema"
-                android:tag="vertR"
-                android:layout_marginTop="50dp"
-                android:layout_gravity="center"
-                android:background="@color/vertremaining"/>
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:id="@+id/IVbleuRema"
-                android:tag="bleuR"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:background="@color/bleuremaining"/>
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:id="@+id/IVjauneRema"
-                android:tag="jauneR"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:background="@color/jauneremaining"/>
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:id="@+id/IVrougeRema"
-                android:tag="rougeR"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_gravity="center"
-                android:background="@color/rougeremaining"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ADD"
-                android:onClick="testcallApi"/>
-
-        </LinearLayout>
-
-
-    </ScrollView>
+    </LinearLayout>
 
 </LinearLayout>

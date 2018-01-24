@@ -1,6 +1,7 @@
 package com.example.ecepfe.agilit;
 
 import android.content.ClipData;
+import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     ScrollView zonededrop1, zonededrop2, zonededrop3, scrollViewTest;
     LinearLayout linearLayoutTest, linearLayoutTest2, utilisateursList;
-    TextView texttemp;
+    TextView texttemp, hours, mmmmm;
     ImageView picutilisateur1, picutilisateur2, picutilisateur3, picutilisateur4, picutilisateur5, picutilisateur6, imageViewtemp, imageViewtemp2, imageViewtemp3, vertRema, bleuRema, jauneRema, rougeRema;
     RelativeLayout containertemp, containertemp2, containertemppopup;
     ContainerTache testcontainer = new ContainerTache();
@@ -52,6 +55,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("Kanban");
+
+        Date currentTime = Calendar.getInstance().getTime();
+
+        hours = (TextView) findViewById(R.id.hours);
+        mmmmm = (TextView) findViewById(R.id.mmmmmm);
+
+        hours.setText(currentTime.getHours() + " : ");
+        mmmmm.setText(String.valueOf(currentTime.getMinutes()));
 
         //region Global variable set
         Global.idImagelist.clear();
@@ -976,6 +987,33 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("ERROR", t.getMessage());
             }
         });
+    }
+
+    private class requestAsynchrone extends AsyncTask<String, Void, Void> {
+
+        Call<Example> call = apiInterface.getAllData();
+
+        @Override
+        protected Void doInBackground(String... params) {
+
+            call.enqueue(new Callback<Example>() {
+                @Override
+                public void onResponse(Call<Example> call, Response<Example> response) {
+                    Log.i("test", "sucess");
+
+                    exampletemp = response.body();
+
+
+                }
+
+                @Override
+                public void onFailure(Call<Example> call, Throwable t) {
+                    Log.i("test", "fail");
+                    Log.i("ERROR", t.getMessage());
+                }
+            });
+            return null;
+        }
     }
 
 }
