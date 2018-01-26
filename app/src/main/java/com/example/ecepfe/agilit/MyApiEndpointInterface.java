@@ -9,7 +9,7 @@ import retrofit2.http.*;
 
 public interface MyApiEndpointInterface {
 
-    @GET("issue/AIS-1/issuetype")
+    /*@GET("issue/AIS-1/issuetype")
     Call<Example> getIssue();
 
     @GET("issue/AIS-1/assignee")
@@ -19,6 +19,9 @@ public interface MyApiEndpointInterface {
     Call<Example> getStatus();
 
     @GET("issue/AIS-1")
-    Call<Example> getAllData();
+    Call<Example> getAllData();*/
+
+    @GET("1")
+    Call<ListeTaches> getAllTache();
 
 }

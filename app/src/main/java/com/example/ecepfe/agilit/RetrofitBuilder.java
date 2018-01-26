@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitBuilder {
 
-    public static final String BASE_URL = "http://ec2-52-47-178-75.eu-west-3.compute.amazonaws.com/api/v1/";
+    public static final String BASE_URL = "http://ec2-52-47-178-75.eu-west-3.compute.amazonaws.com/api/v1/sprint/";
 
     public static Retrofit retrofit = null;
 

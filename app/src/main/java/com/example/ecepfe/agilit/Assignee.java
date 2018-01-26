@@ -1,7 +1,7 @@
 package com.example.ecepfe.agilit;
 
 /**
- * Created by Jean on 22/01/2018.
+ * Created by Jean on 25/01/2018.
  */
 
 import com.google.gson.annotations.Expose;
@@ -9,104 +9,27 @@ import com.google.gson.annotations.SerializedName;
 
 public class Assignee {
 
-    @SerializedName("self")
+    @SerializedName("username")
     @Expose
-    private String self;
-    @SerializedName("name")
+    private String username;
+    @SerializedName("img_link")
     @Expose
-    private String name;
-    @SerializedName("key")
-    @Expose
-    private String key;
-    @SerializedName("accountId")
-    @Expose
-    private String accountId;
-    @SerializedName("emailAddress")
-    @Expose
-    private String emailAddress;
-    @SerializedName("avatarUrls")
-    @Expose
-    private AvatarUrls_ avatarUrls;
-    @SerializedName("displayName")
-    @Expose
-    private String displayName;
-    @SerializedName("active")
-    @Expose
-    private Boolean active;
-    @SerializedName("timeZone")
-    @Expose
-    private String timeZone;
+    private String imgLink;
 
-    public String getSelf() {
-        return self;
+    public String getUsername() {
+        return username;
     }
 
-    public void setSelf(String self) {
-        this.self = self;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getName() {
-        return name;
+    public String getImgLink() {
+        return imgLink;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public AvatarUrls_ getAvatarUrls() {
-        return avatarUrls;
-    }
-
-    public void setAvatarUrls(AvatarUrls_ avatarUrls) {
-        this.avatarUrls = avatarUrls;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public String getTimeZone() {
-        return timeZone;
-    }
-
-    public void setTimeZone(String timeZone) {
-        this.timeZone = timeZone;
+    public void setImgLink(String imgLink) {
+        this.imgLink = imgLink;
     }
 
 }

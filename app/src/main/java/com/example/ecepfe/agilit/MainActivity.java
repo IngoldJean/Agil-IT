@@ -25,6 +25,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,26 +44,15 @@ public class MainActivity extends AppCompatActivity {
     ContainerTache testcontainer3 = new ContainerTache();
     ContainerTache testcontainerfromserver = new ContainerTache();
 
-    private MyApiEndpointInterface apiInterface;
-    private Fields fieldstemp;
-    private Example exampletemp;
-    private Issuetype issuetypetemp;
-    private Assignee assigneetemp;
-    private Status statustemp;
+    public MyApiEndpointInterface apiInterface;
+    public ListeTaches listeTachexemple;
+    public List<ListIssue> listissuestemp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("Kanban");
-
-        Date currentTime = Calendar.getInstance().getTime();
-
-        hours = (TextView) findViewById(R.id.hours);
-        mmmmm = (TextView) findViewById(R.id.mmmmmm);
-
-        hours.setText(currentTime.getHours() + " : ");
-        mmmmm.setText(String.valueOf(currentTime.getMinutes()));
 
         //region Global variable set
         Global.idImagelist.clear();
@@ -166,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         List<String> testlist = new ArrayList<String>();
         List<String> testlist2 = new ArrayList<String>();
         List<String> testlist3 = new ArrayList<String>();
+        List<String> testlistserver = new ArrayList<String>();
         testlist.add("utilisateur1");
         testlist.add("utilisateur2");
         testlist.add("utilisateur3");
@@ -201,10 +192,96 @@ public class MainActivity extends AppCompatActivity {
 
         //endregion
 
-        ajouterTachesDynamiquement(Global.listecontainer);
+        //region Generation via appel API de la liste des containers
+        apiInterface = RetrofitBuilder.getRetrofitBuilder().create(MyApiEndpointInterface.class);
+        listeTachexemple = null;
+        Call<ListeTaches> call = apiInterface.getAllTache();
+
+        call.enqueue(new Callback<ListeTaches>() {
+            @Override
+            public void onResponse(Call<ListeTaches> call, Response<ListeTaches> response) {
+                listeTachexemple = response.body();
+
+                List<ListIssue> listissuestemp;
+                /*List<String> testlistserver = new ArrayList<String>();
+                Assignee assignetemp;*/
+
+                if (listeTachexemple != null) {
+                    listissuestemp = listeTachexemple.getListIssue();
+
+                    for(ListIssue issue : listissuestemp) {
+                        conversionIssueToContainer(issue);
+                    }
+
+                    /*Log.i("description", String.valueOf(listissuestemp.get(1).getDescription()));
+                    Log.i("status", listissuestemp.get(1).getStatus());
+                    Log.i("Remainings", String.valueOf(listissuestemp.get(1).getTimeRemaining()));
+                    assignetemp = listissuestemp.get(1).getAssignee();
+                    Log.i("utilisateur", assignetemp.getUsername());
+
+                    testcontainerfromserver.setRemaining(10);
+                    testcontainerfromserver.setTache((String) listissuestemp.get(1).getDescription());
+
+                    if (Objects.equals(listissuestemp.get(1).getStatus(), "Done")) {
+                        testcontainerfromserver.setEtatdelatache("etat3");
+                    }
+                    testlistserver.add(assignetemp.getUsername());
+
+                    testcontainerfromserver.setUtilisateurs(testlistserver);
+
+                    Log.i("description 2", testcontainerfromserver.getTache());
+                    Log.i("status 2", testcontainerfromserver.getEtatdelatache());
+                    Log.i("Remainings 2", String.valueOf(testcontainerfromserver.getRemaining()));
+                    Log.i("utilisateur 2", String.valueOf(testcontainerfromserver.getUtilisateurs()));
+
+                    Global.listecontainer.add(testcontainerfromserver);*/
+                }
+                ajouterTachesDynamiquement(Global.listecontainer);
+
+                             //region Listenerisation modulable
+                             linearLayoutTest = (LinearLayout) findViewById(R.id.fullscreen);
+                             //prendre tous les éléments de l'écran
+                             for (int index = 0; index < (linearLayoutTest).getChildCount(); ++index) {
+                                 View nextChild = (linearLayoutTest).getChildAt(index);
+                                 //Si c'est un ScrollView
+                                 if (nextChild instanceof ScrollView) {
+                                     scrollViewTest = (ScrollView) findViewById(nextChild.getId());
+                                     //prendre tous les éléments des scrollviews
+                                     for (int index2 = 0; index2 < (scrollViewTest).getChildCount(); ++index2) {
+                                         View nextChild2 = (scrollViewTest).getChildAt(index2);
+                                         //Si c'est un LinearLayout
+                                         if (nextChild2 instanceof LinearLayout) {
+                                             linearLayoutTest2 = (LinearLayout) findViewById(nextChild2.getId());
+                                             //prendre tous les éléments du LinearLayout
+                                             for (int index3 = 0; index3 < (linearLayoutTest2).getChildCount(); ++index3) {
+                                                 View nextChild3 = (linearLayoutTest2).getChildAt(index3);
+                                                 //Si c'est un RelativeLayout
+                                                 if (nextChild3 instanceof RelativeLayout) {
+                                                     containertemp = (RelativeLayout) findViewById(nextChild3.getId());
+                                                     containertemp.setOnLongClickListener(containerLongClickListener);
+                                                     containertemp.setOnClickListener(affichagepopupdisplaycontent);
+                                                 }
+                                             }
+                                         }
+                                     }
+                                 }
+                             }
+                             //endregion
+            }
+
+            @Override
+            public void onFailure(Call<ListeTaches> call, Throwable t) {
+                Log.i("test", "fail");
+                Log.i("ERROR", t.getMessage());
+            }
+        });
+        //endregion
+
+
+        //ajouterTachesDynamiquement(Global.listecontainer);
 
         //region Listenerisation modulable
-        linearLayoutTest = (LinearLayout) findViewById(R.id.fullscreen);
+        /*linearLayoutTest = (LinearLayout) findViewById(R.id.fullscreen);
         //prendre tous les éléments de l'écran
         for (int index = 0; index < (linearLayoutTest).getChildCount(); ++index) {
             View nextChild = (linearLayoutTest).getChildAt(index);
@@ -230,8 +307,44 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-        }
+        }*/
         //endregion
+    }
+
+    private void conversionIssueToContainer(ListIssue issue) {
+
+        List<String> utilisateur = new ArrayList<String>();
+        Assignee assignetemp;
+
+        Log.i("description", String.valueOf(issue.getDescription()));
+        Log.i("status", issue.getStatus());
+        Log.i("Remainings", String.valueOf(issue.getTimeRemaining()));
+        assignetemp = issue.getAssignee();
+        Log.i("utilisateur", assignetemp.getUsername());
+
+        testcontainerfromserver.setRemaining(10);
+        //testcontainerfromserver.setTache(String.valueOf(issue.getDescription()));
+        testcontainerfromserver.setTache(String.valueOf(issue.getDescription()));
+
+        if (Objects.equals(issue.getStatus(), "Done")) {
+            testcontainerfromserver.setEtatdelatache("etat3");
+        }
+        if (Objects.equals(issue.getStatus(), "To-do")) {
+            testcontainerfromserver.setEtatdelatache("etat1");
+        }
+        if (Objects.equals(issue.getStatus(), "In progress")) {
+            testcontainerfromserver.setEtatdelatache("etat2");
+        }
+        utilisateur.add(assignetemp.getUsername());
+
+        testcontainerfromserver.setUtilisateurs(utilisateur);
+
+        Log.i("description 2", testcontainerfromserver.getTache());
+        Log.i("status 2", testcontainerfromserver.getEtatdelatache());
+        Log.i("Remainings 2", String.valueOf(testcontainerfromserver.getRemaining()));
+        Log.i("utilisateur 2", String.valueOf(testcontainerfromserver.getUtilisateurs()));
+
+        Global.listecontainer.add(testcontainerfromserver);
     }
 
 
@@ -951,69 +1064,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,"Remining spérieur à 20 jours!",Toast.LENGTH_LONG).show();
         }
 
-    }
-
-    public void testcallApi(View view){
-        apiInterface = RetrofitBuilder.getRetrofitBuilder().create(MyApiEndpointInterface.class);
-
-        Call<Example> call = apiInterface.getAllData();
-
-        call.enqueue(new Callback<Example>() {
-            @Override
-            public void onResponse(Call<Example> call, Response<Example> response) {
-                Log.i("test", "sucess");
-
-                exampletemp = response.body();
-
-                fieldstemp = exampletemp.getFields();
-
-                issuetypetemp = fieldstemp.getIssuetype();
-
-                assigneetemp = fieldstemp.getAssignee();
-
-                statustemp = fieldstemp.getStatus();
-
-
-                Log.i("Timeremaining", String.valueOf(fieldstemp.getTimeestimate()));
-                Log.i("Description", String.valueOf(issuetypetemp.getDescription()));
-                Log.i("Assigne", assigneetemp.getName());
-                Log.i("Status", statustemp.getName());
-
-            }
-
-            @Override
-            public void onFailure(Call<Example> call, Throwable t) {
-                Log.i("test", "fail");
-                Log.i("ERROR", t.getMessage());
-            }
-        });
-    }
-
-    private class requestAsynchrone extends AsyncTask<String, Void, Void> {
-
-        Call<Example> call = apiInterface.getAllData();
-
-        @Override
-        protected Void doInBackground(String... params) {
-
-            call.enqueue(new Callback<Example>() {
-                @Override
-                public void onResponse(Call<Example> call, Response<Example> response) {
-                    Log.i("test", "sucess");
-
-                    exampletemp = response.body();
-
-
-                }
-
-                @Override
-                public void onFailure(Call<Example> call, Throwable t) {
-                    Log.i("test", "fail");
-                    Log.i("ERROR", t.getMessage());
-                }
-            });
-            return null;
-        }
     }
 
 }
