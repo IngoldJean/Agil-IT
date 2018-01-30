@@ -19,7 +19,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitBuilder {
 
-    public static final String BASE_URL = "http://ec2-52-47-178-75.eu-west-3.compute.amazonaws.com/api/v1/sprint/";
+    public static final String BASE_URL = "http://ec2-52-47-178-75.eu-west-3.compute.amazonaws.com/api/v1/";
+
+    //public static final String BASE_URL = "https://postman-echo.com/";
 
     public static Retrofit retrofit = null;
 
@@ -32,6 +34,7 @@ public class RetrofitBuilder {
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        //interceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
 
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 

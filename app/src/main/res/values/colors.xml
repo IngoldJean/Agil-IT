@@ -11,4 +11,8 @@
     <color name="jauneremaining">#F69533</color>
     <color name="vertremaining">#1DBD32</color>
     <color name="blanc">#FFFFFF</color>
+    
+    <color name="bleutimer">#31f0d6</color>
+    <color name="orangetimer">#efc141</color>
+    <color name="rougetimer">#ff5032</color>
 </resources>

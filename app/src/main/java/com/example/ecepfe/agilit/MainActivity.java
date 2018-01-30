@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -36,17 +38,21 @@ public class MainActivity extends AppCompatActivity {
 
     ScrollView zonededrop1, zonededrop2, zonededrop3, scrollViewTest;
     LinearLayout linearLayoutTest, linearLayoutTest2, utilisateursList;
-    TextView texttemp, hours, mmmmm;
+    TextView utilname1, utilname2, utilname3, utilname4, utilname5, utilname6, texttemp;
     ImageView picutilisateur1, picutilisateur2, picutilisateur3, picutilisateur4, picutilisateur5, picutilisateur6, imageViewtemp, imageViewtemp2, imageViewtemp3, vertRema, bleuRema, jauneRema, rougeRema;
     RelativeLayout containertemp, containertemp2, containertemppopup;
+    ProgressBar progressBarTempsParole;
     ContainerTache testcontainer = new ContainerTache();
     ContainerTache testcontainer2 = new ContainerTache();
     ContainerTache testcontainer3 = new ContainerTache();
-    ContainerTache testcontainerfromserver = new ContainerTache();
+
+    Integer index =0;
 
     public MyApiEndpointInterface apiInterface;
     public ListeTaches listeTachexemple;
     public List<ListIssue> listissuestemp;
+    public Utilisateurs utilisateurs;
+    public List<ListMember> members;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,59 +60,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("Kanban");
 
-        //region Global variable set
-        Global.idImagelist.clear();
-        Global.incrementeurIDimage = 0;
-        Global.idImagelist.add(R.id.IVid1);
-        Global.idImagelist.add(R.id.IVid2);
-        Global.idImagelist.add(R.id.IVid3);
-        Global.idImagelist.add(R.id.IVid4);
-        Global.idImagelist.add(R.id.IVid5);
-        Global.idImagelist.add(R.id.IVid6);
-        Global.idImagelist.add(R.id.IVid7);
-        Global.idImagelist.add(R.id.IVid8);
-        Global.idImagelist.add(R.id.IVid9);
-        Global.idImagelist.add(R.id.IVid10);
-        Global.idImagelist.add(R.id.IVid11);
-        Global.idImagelist.add(R.id.IVid12);
-        Global.idImagelist.add(R.id.IVid13);
-        Global.idImagelist.add(R.id.IVid14);
-        Global.idImagelist.add(R.id.IVid15);
-        Global.idImagelist.add(R.id.IVid16);
-        Global.idImagelist.add(R.id.IVid17);
-        Global.idImagelist.add(R.id.IVid18);
-        Global.idImagelist.add(R.id.IVid19);
-        Global.idImagelist.add(R.id.IVid20);
-        Global.idImagelist.add(R.id.IVid21);
-        Global.idImagelist.add(R.id.IVid22);
-        Global.idImagelist.add(R.id.IVid23);
-        Global.idImagelist.add(R.id.IVid24);
-
-        Global.idTextlist.clear();
-        Global.incrementeurIDtext =0;
-        Global.idTextlist.add(R.id.TVid1);
-        Global.idTextlist.add(R.id.TVid2);
-        Global.idTextlist.add(R.id.TVid3);
-        Global.idTextlist.add(R.id.TVid4);
-        Global.idTextlist.add(R.id.TVid5);
-        Global.idTextlist.add(R.id.TVid6);
-
-        Global.idContainerlist.clear();
-        Global.idContainerlist.add(R.id.Containerid1);
-        Global.idContainerlist.add(R.id.Containerid2);
-        Global.idContainerlist.add(R.id.Containerid3);
-        Global.idContainerlist.add(R.id.Containerid4);
-        Global.idContainerlist.add(R.id.Containerid5);
-        Global.idContainerlist.add(R.id.Containerid6);
-
-        Global.idLinearlist.clear();
-        Global.idLinearlist.add(R.id.Linearid1);
-        Global.idLinearlist.add(R.id.Linearid2);
-        Global.idLinearlist.add(R.id.Linearid3);
-        Global.idLinearlist.add(R.id.Linearid4);
-        Global.idLinearlist.add(R.id.Linearid5);
-        Global.idLinearlist.add(R.id.Linearid6);
-        //endregion
+        global_variable_set();
 
         //region Affectation des variables
         zonededrop1 = (ScrollView) findViewById(R.id.zonedrop1);
@@ -120,11 +74,29 @@ public class MainActivity extends AppCompatActivity {
         picutilisateur5 = (ImageView) findViewById(R.id.picutilisateur5);
         picutilisateur6 = (ImageView) findViewById(R.id.picutilisateur6);
 
+        utilname1 = (TextView) findViewById(R.id.nomutilisateur1);
+        utilname2 = (TextView) findViewById(R.id.nomutilisateur2);
+        utilname3 = (TextView) findViewById(R.id.nomutilisateur3);
+        utilname4 = (TextView) findViewById(R.id.nomutilisateur4);
+        utilname5 = (TextView) findViewById(R.id.nomutilisateur5);
+        utilname6 = (TextView) findViewById(R.id.nomutilisateur6);
+
         vertRema = (ImageView) findViewById(R.id.IVvertRema);
         jauneRema = (ImageView) findViewById(R.id.IVjauneRema);
         rougeRema = (ImageView) findViewById(R.id.IVrougeRema);
         bleuRema = (ImageView) findViewById(R.id.IVbleuRema);
+
+        progressBarTempsParole = (ProgressBar) findViewById(R.id.progressbarParole);
         //endregion
+
+        recuplist();
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         //region Listenerisation
 
@@ -157,15 +129,15 @@ public class MainActivity extends AppCompatActivity {
         List<String> testlist2 = new ArrayList<String>();
         List<String> testlist3 = new ArrayList<String>();
         List<String> testlistserver = new ArrayList<String>();
-        testlist.add("utilisateur1");
-        testlist.add("utilisateur2");
-        testlist.add("utilisateur3");
+        testlist.add("admin");
+        testlist.add("antoine.duhesme");
+        testlist.add("corentin.leal");
 
-        testlist2.add("utilisateur6");
+        testlist2.add("laurent.lieng");
 
-        testlist3.add("utilisateur4");
-        testlist3.add("utilisateur2");
-        testlist3.add("utilisateur5");
+        testlist3.add("corentin.leal");
+        testlist3.add("antoine.duhesme");
+        testlist3.add("jean.ingold");
 
 
 
@@ -203,70 +175,44 @@ public class MainActivity extends AppCompatActivity {
                 listeTachexemple = response.body();
 
                 List<ListIssue> listissuestemp;
-                /*List<String> testlistserver = new ArrayList<String>();
-                Assignee assignetemp;*/
 
                 if (listeTachexemple != null) {
                     listissuestemp = listeTachexemple.getListIssue();
-
                     for(ListIssue issue : listissuestemp) {
                         conversionIssueToContainer(issue);
                     }
-
-                    /*Log.i("description", String.valueOf(listissuestemp.get(1).getDescription()));
-                    Log.i("status", listissuestemp.get(1).getStatus());
-                    Log.i("Remainings", String.valueOf(listissuestemp.get(1).getTimeRemaining()));
-                    assignetemp = listissuestemp.get(1).getAssignee();
-                    Log.i("utilisateur", assignetemp.getUsername());
-
-                    testcontainerfromserver.setRemaining(10);
-                    testcontainerfromserver.setTache((String) listissuestemp.get(1).getDescription());
-
-                    if (Objects.equals(listissuestemp.get(1).getStatus(), "Done")) {
-                        testcontainerfromserver.setEtatdelatache("etat3");
-                    }
-                    testlistserver.add(assignetemp.getUsername());
-
-                    testcontainerfromserver.setUtilisateurs(testlistserver);
-
-                    Log.i("description 2", testcontainerfromserver.getTache());
-                    Log.i("status 2", testcontainerfromserver.getEtatdelatache());
-                    Log.i("Remainings 2", String.valueOf(testcontainerfromserver.getRemaining()));
-                    Log.i("utilisateur 2", String.valueOf(testcontainerfromserver.getUtilisateurs()));
-
-                    Global.listecontainer.add(testcontainerfromserver);*/
                 }
                 ajouterTachesDynamiquement(Global.listecontainer);
 
-                             //region Listenerisation modulable
-                             linearLayoutTest = (LinearLayout) findViewById(R.id.fullscreen);
-                             //prendre tous les éléments de l'écran
-                             for (int index = 0; index < (linearLayoutTest).getChildCount(); ++index) {
-                                 View nextChild = (linearLayoutTest).getChildAt(index);
-                                 //Si c'est un ScrollView
-                                 if (nextChild instanceof ScrollView) {
-                                     scrollViewTest = (ScrollView) findViewById(nextChild.getId());
-                                     //prendre tous les éléments des scrollviews
-                                     for (int index2 = 0; index2 < (scrollViewTest).getChildCount(); ++index2) {
-                                         View nextChild2 = (scrollViewTest).getChildAt(index2);
-                                         //Si c'est un LinearLayout
-                                         if (nextChild2 instanceof LinearLayout) {
-                                             linearLayoutTest2 = (LinearLayout) findViewById(nextChild2.getId());
-                                             //prendre tous les éléments du LinearLayout
-                                             for (int index3 = 0; index3 < (linearLayoutTest2).getChildCount(); ++index3) {
-                                                 View nextChild3 = (linearLayoutTest2).getChildAt(index3);
-                                                 //Si c'est un RelativeLayout
-                                                 if (nextChild3 instanceof RelativeLayout) {
-                                                     containertemp = (RelativeLayout) findViewById(nextChild3.getId());
-                                                     containertemp.setOnLongClickListener(containerLongClickListener);
-                                                     containertemp.setOnClickListener(affichagepopupdisplaycontent);
-                                                 }
-                                             }
-                                         }
-                                     }
-                                 }
-                             }
-                             //endregion
+                //region Listenerisation modulable
+                linearLayoutTest = (LinearLayout) findViewById(R.id.fullscreen);
+                //prendre tous les éléments de l'écran
+                for (int index = 0; index < (linearLayoutTest).getChildCount(); ++index) {
+                    View nextChild = (linearLayoutTest).getChildAt(index);
+                    //Si c'est un ScrollView
+                    if (nextChild instanceof ScrollView) {
+                        scrollViewTest = (ScrollView) findViewById(nextChild.getId());
+                        //prendre tous les éléments des scrollviews
+                        for (int index2 = 0; index2 < (scrollViewTest).getChildCount(); ++index2) {
+                            View nextChild2 = (scrollViewTest).getChildAt(index2);
+                            //Si c'est un LinearLayout
+                            if (nextChild2 instanceof LinearLayout) {
+                                linearLayoutTest2 = (LinearLayout) findViewById(nextChild2.getId());
+                                //prendre tous les éléments du LinearLayout
+                                for (int index3 = 0; index3 < (linearLayoutTest2).getChildCount(); ++index3) {
+                                    View nextChild3 = (linearLayoutTest2).getChildAt(index3);
+                                    //Si c'est un RelativeLayout
+                                    if (nextChild3 instanceof RelativeLayout) {
+                                        containertemp = (RelativeLayout) findViewById(nextChild3.getId());
+                                        containertemp.setOnLongClickListener(containerLongClickListener);
+                                        containertemp.setOnClickListener(affichagepopupdisplaycontent);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                //endregion
             }
 
             @Override
@@ -276,9 +222,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //endregion
-
-
-        //ajouterTachesDynamiquement(Global.listecontainer);
 
         //region Listenerisation modulable
         /*linearLayoutTest = (LinearLayout) findViewById(R.id.fullscreen);
@@ -309,6 +252,40 @@ public class MainActivity extends AppCompatActivity {
             }
         }*/
         //endregion
+
+        //region Gestion du indicateur de temps de parole
+        progressBarTempsParole.setBackgroundColor(getResources().getColor(R.color.bleutimer));
+        progressBarTempsParole.setProgress(0);
+
+        Thread t = new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                try{
+                    while (!isInterrupted()){
+                        Thread.sleep(1500);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Integer progres = 0;
+                                progres = progressBarTempsParole.getProgress() + 1;
+                                if(progres > 80){
+                                    progressBarTempsParole.setBackgroundColor(getResources().getColor(R.color.orangetimer));
+                                }
+                                if(progres > 100){
+                                    progressBarTempsParole.setBackgroundColor(getResources().getColor(R.color.rougetimer));
+                                }
+                                progressBarTempsParole.setProgress(progres);
+                            }
+                        });
+                    }
+                }catch (Exception ex){
+                    Log.i("error thread", String.valueOf(ex));
+                }
+            }
+        };
+        t.start();
+        //endregion
     }
 
     private void conversionIssueToContainer(ListIssue issue) {
@@ -316,33 +293,37 @@ public class MainActivity extends AppCompatActivity {
         List<String> utilisateur = new ArrayList<String>();
         Assignee assignetemp;
 
-        Log.i("description", String.valueOf(issue.getDescription()));
-        Log.i("status", issue.getStatus());
-        Log.i("Remainings", String.valueOf(issue.getTimeRemaining()));
+        //Log.i("description", String.valueOf(issue.getTitle()));
+        //Log.i("status", issue.getStatus());
+        //Log.i("Remainings", String.valueOf(issue.getTimeRemaining()));
         assignetemp = issue.getAssignee();
-        Log.i("utilisateur", assignetemp.getUsername());
+        //Log.i("utilisateur", assignetemp.getUsername());
+        //Log.i("id", issue.getId());
+
+        ContainerTache testcontainerfromserver = Global.lcontainertemp.get(Global.incrementeurtempcontainer);
+        Global.incrementeurtempcontainer = Global.incrementeurtempcontainer + 1;
 
         testcontainerfromserver.setRemaining(10);
-        //testcontainerfromserver.setTache(String.valueOf(issue.getDescription()));
-        testcontainerfromserver.setTache(String.valueOf(issue.getDescription()));
+        testcontainerfromserver.setTache(String.valueOf(issue.getTitle()));
+        testcontainerfromserver.setId(issue.getId());
 
         if (Objects.equals(issue.getStatus(), "Done")) {
             testcontainerfromserver.setEtatdelatache("etat3");
         }
-        if (Objects.equals(issue.getStatus(), "To-do")) {
+        if (Objects.equals(issue.getStatus(), "To Do")) {
             testcontainerfromserver.setEtatdelatache("etat1");
         }
-        if (Objects.equals(issue.getStatus(), "In progress")) {
+        if (Objects.equals(issue.getStatus(), "In Progress")) {
             testcontainerfromserver.setEtatdelatache("etat2");
         }
         utilisateur.add(assignetemp.getUsername());
 
         testcontainerfromserver.setUtilisateurs(utilisateur);
 
-        Log.i("description 2", testcontainerfromserver.getTache());
-        Log.i("status 2", testcontainerfromserver.getEtatdelatache());
-        Log.i("Remainings 2", String.valueOf(testcontainerfromserver.getRemaining()));
-        Log.i("utilisateur 2", String.valueOf(testcontainerfromserver.getUtilisateurs()));
+        //Log.i("description 2", testcontainerfromserver.getTache());
+        //Log.i("status 2", testcontainerfromserver.getEtatdelatache());
+        //Log.i("Remainings 2", String.valueOf(testcontainerfromserver.getRemaining()));
+        //Log.i("utilisateur 2", String.valueOf(testcontainerfromserver.getUtilisateurs()));
 
         Global.listecontainer.add(testcontainerfromserver);
     }
@@ -629,9 +610,9 @@ public class MainActivity extends AppCompatActivity {
                     if(v.getId()==R.id.zonedrop2){
                         ViewGroup from = (ViewGroup) view.getParent();
                         from.removeView(view);
-                        //LinearLayout container = (LinearLayout) v;
                         LinearLayout container = (LinearLayout) findViewById(R.id.list_des_taches2);
                         container.addView(view);
+                        changeStatus((String) view.getTag(), 2);
                         break;
                     }
                     if(v.getId()==R.id.zonedrop1){
@@ -639,6 +620,7 @@ public class MainActivity extends AppCompatActivity {
                         from.removeView(view);
                         LinearLayout container = (LinearLayout) findViewById(R.id.list_des_taches1);
                         container.addView(view);
+                        changeStatus((String) view.getTag(), 1);
                         break;
                     }
                     if(v.getId()==R.id.zonedrop3){
@@ -646,6 +628,7 @@ public class MainActivity extends AppCompatActivity {
                         from.removeView(view);
                         LinearLayout container = (LinearLayout) findViewById(R.id.list_des_taches3);
                         container.addView(view);
+                        changeStatus((String) view.getTag(), 3);
                         break;
                     }
                     break;
@@ -950,6 +933,7 @@ public class MainActivity extends AppCompatActivity {
         construction.addView(tempImageDY4, paramsImage4);
         construction.addView(tempText, paramsText);
         construction.addView(linearTemp, paramsLinearDepose);
+        construction.setTag(container.getId());
 
         construction.setId(Global.idContainerlist.get(Global.incrementeurIDcontainer));
         Global.incrementeurIDcontainer = Global.incrementeurIDcontainer + 1;
@@ -1066,4 +1050,298 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void global_variable_set() {
+
+        Global.idImagelist.clear();
+        Global.incrementeurIDimage = 0;
+        Global.idImagelist.add(R.id.IVid1);
+        Global.idImagelist.add(R.id.IVid2);
+        Global.idImagelist.add(R.id.IVid3);
+        Global.idImagelist.add(R.id.IVid4);
+        Global.idImagelist.add(R.id.IVid5);
+        Global.idImagelist.add(R.id.IVid6);
+        Global.idImagelist.add(R.id.IVid7);
+        Global.idImagelist.add(R.id.IVid8);
+        Global.idImagelist.add(R.id.IVid9);
+        Global.idImagelist.add(R.id.IVid10);
+        Global.idImagelist.add(R.id.IVid11);
+        Global.idImagelist.add(R.id.IVid12);
+        Global.idImagelist.add(R.id.IVid13);
+        Global.idImagelist.add(R.id.IVid14);
+        Global.idImagelist.add(R.id.IVid15);
+        Global.idImagelist.add(R.id.IVid16);
+        Global.idImagelist.add(R.id.IVid17);
+        Global.idImagelist.add(R.id.IVid18);
+        Global.idImagelist.add(R.id.IVid19);
+        Global.idImagelist.add(R.id.IVid20);
+        Global.idImagelist.add(R.id.IVid21);
+        Global.idImagelist.add(R.id.IVid22);
+        Global.idImagelist.add(R.id.IVid23);
+        Global.idImagelist.add(R.id.IVid24);
+        Global.idImagelist.add(R.id.IVid25);
+        Global.idImagelist.add(R.id.IVid26);
+        Global.idImagelist.add(R.id.IVid27);
+        Global.idImagelist.add(R.id.IVid28);
+        Global.idImagelist.add(R.id.IVid29);
+        Global.idImagelist.add(R.id.IVid30);
+        Global.idImagelist.add(R.id.IVid31);
+        Global.idImagelist.add(R.id.IVid32);
+        Global.idImagelist.add(R.id.IVid33);
+        Global.idImagelist.add(R.id.IVid34);
+        Global.idImagelist.add(R.id.IVid35);
+        Global.idImagelist.add(R.id.IVid36);
+        Global.idImagelist.add(R.id.IVid37);
+        Global.idImagelist.add(R.id.IVid38);
+        Global.idImagelist.add(R.id.IVid39);
+        Global.idImagelist.add(R.id.IVid40);
+        Global.idImagelist.add(R.id.IVid41);
+        Global.idImagelist.add(R.id.IVid42);
+        Global.idImagelist.add(R.id.IVid43);
+        Global.idImagelist.add(R.id.IVid44);
+        Global.idImagelist.add(R.id.IVid45);
+        Global.idImagelist.add(R.id.IVid46);
+        Global.idImagelist.add(R.id.IVid47);
+        Global.idImagelist.add(R.id.IVid48);
+        Global.idImagelist.add(R.id.IVid49);
+        Global.idImagelist.add(R.id.IVid50);
+        Global.idImagelist.add(R.id.IVid51);
+        Global.idImagelist.add(R.id.IVid52);
+        Global.idImagelist.add(R.id.IVid53);
+        Global.idImagelist.add(R.id.IVid54);
+        Global.idImagelist.add(R.id.IVid55);
+        Global.idImagelist.add(R.id.IVid56);
+        Global.idImagelist.add(R.id.IVid57);
+        Global.idImagelist.add(R.id.IVid58);
+        Global.idImagelist.add(R.id.IVid59);
+        Global.idImagelist.add(R.id.IVid60);
+        Global.idImagelist.add(R.id.IVid61);
+        Global.idImagelist.add(R.id.IVid62);
+        Global.idImagelist.add(R.id.IVid63);
+        Global.idImagelist.add(R.id.IVid64);
+        Global.idImagelist.add(R.id.IVid65);
+        Global.idImagelist.add(R.id.IVid66);
+        Global.idImagelist.add(R.id.IVid67);
+        Global.idImagelist.add(R.id.IVid68);
+        Global.idImagelist.add(R.id.IVid69);
+        Global.idImagelist.add(R.id.IVid70);
+        Global.idImagelist.add(R.id.IVid71);
+        Global.idImagelist.add(R.id.IVid72);
+        Global.idImagelist.add(R.id.IVid73);
+        Global.idImagelist.add(R.id.IVid74);
+        Global.idImagelist.add(R.id.IVid75);
+        Global.idImagelist.add(R.id.IVid76);
+        Global.idImagelist.add(R.id.IVid77);
+        Global.idImagelist.add(R.id.IVid78);
+        Global.idImagelist.add(R.id.IVid79);
+        Global.idImagelist.add(R.id.IVid80);
+
+        Global.idTextlist.clear();
+        Global.incrementeurIDtext =0;
+        Global.idTextlist.add(R.id.TVid1);
+        Global.idTextlist.add(R.id.TVid2);
+        Global.idTextlist.add(R.id.TVid3);
+        Global.idTextlist.add(R.id.TVid4);
+        Global.idTextlist.add(R.id.TVid5);
+        Global.idTextlist.add(R.id.TVid6);
+        Global.idTextlist.add(R.id.TVid7);
+        Global.idTextlist.add(R.id.TVid8);
+        Global.idTextlist.add(R.id.TVid9);
+        Global.idTextlist.add(R.id.TVid10);
+        Global.idTextlist.add(R.id.TVid11);
+        Global.idTextlist.add(R.id.TVid12);
+        Global.idTextlist.add(R.id.TVid13);
+        Global.idTextlist.add(R.id.TVid14);
+        Global.idTextlist.add(R.id.TVid15);
+        Global.idTextlist.add(R.id.TVid16);
+        Global.idTextlist.add(R.id.TVid17);
+        Global.idTextlist.add(R.id.TVid18);
+        Global.idTextlist.add(R.id.TVid19);
+        Global.idTextlist.add(R.id.TVid20);
+
+        Global.idContainerlist.clear();
+        Global.idContainerlist.add(R.id.Containerid1);
+        Global.idContainerlist.add(R.id.Containerid2);
+        Global.idContainerlist.add(R.id.Containerid3);
+        Global.idContainerlist.add(R.id.Containerid4);
+        Global.idContainerlist.add(R.id.Containerid5);
+        Global.idContainerlist.add(R.id.Containerid6);
+        Global.idContainerlist.add(R.id.Containerid7);
+        Global.idContainerlist.add(R.id.Containerid8);
+        Global.idContainerlist.add(R.id.Containerid9);
+        Global.idContainerlist.add(R.id.Containerid10);
+        Global.idContainerlist.add(R.id.Containerid11);
+        Global.idContainerlist.add(R.id.Containerid12);
+        Global.idContainerlist.add(R.id.Containerid13);
+        Global.idContainerlist.add(R.id.Containerid14);
+        Global.idContainerlist.add(R.id.Containerid15);
+        Global.idContainerlist.add(R.id.Containerid16);
+        Global.idContainerlist.add(R.id.Containerid17);
+        Global.idContainerlist.add(R.id.Containerid18);
+        Global.idContainerlist.add(R.id.Containerid19);
+        Global.idContainerlist.add(R.id.Containerid20);
+
+        Global.idLinearlist.clear();
+        Global.idLinearlist.add(R.id.Linearid1);
+        Global.idLinearlist.add(R.id.Linearid2);
+        Global.idLinearlist.add(R.id.Linearid3);
+        Global.idLinearlist.add(R.id.Linearid4);
+        Global.idLinearlist.add(R.id.Linearid5);
+        Global.idLinearlist.add(R.id.Linearid6);
+        Global.idLinearlist.add(R.id.Linearid7);
+        Global.idLinearlist.add(R.id.Linearid8);
+        Global.idLinearlist.add(R.id.Linearid9);
+        Global.idLinearlist.add(R.id.Linearid10);
+        Global.idLinearlist.add(R.id.Linearid11);
+        Global.idLinearlist.add(R.id.Linearid12);
+        Global.idLinearlist.add(R.id.Linearid13);
+        Global.idLinearlist.add(R.id.Linearid14);
+        Global.idLinearlist.add(R.id.Linearid15);
+        Global.idLinearlist.add(R.id.Linearid16);
+        Global.idLinearlist.add(R.id.Linearid17);
+        Global.idLinearlist.add(R.id.Linearid18);
+        Global.idLinearlist.add(R.id.Linearid19);
+        Global.idLinearlist.add(R.id.Linearid20);
+
+        Global.lcontainertemp.clear();
+        ContainerTache testcontainer1 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer1);
+        ContainerTache testcontainer2 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer2);
+        ContainerTache testcontainer3 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer3);
+        ContainerTache testcontainer4 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer4);
+        ContainerTache testcontainer5 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer5);
+        ContainerTache testcontainer6 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer6);
+        ContainerTache testcontainer7 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer7);
+        ContainerTache testcontainer8 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer8);
+        ContainerTache testcontainer9 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer9);
+        ContainerTache testcontainer10 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer10);
+        ContainerTache testcontainer11 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer11);
+        ContainerTache testcontainer12 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer12);
+        ContainerTache testcontainer13 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer13);
+        ContainerTache testcontainer14 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer14);
+        ContainerTache testcontainer15 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer15);
+        ContainerTache testcontainer16 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer16);
+        ContainerTache testcontainer17 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer17);
+        ContainerTache testcontainer18 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer18);
+        ContainerTache testcontainer19 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer19);
+        ContainerTache testcontainer20 = new ContainerTache();
+        Global.lcontainertemp.add(testcontainer20);
+    }
+
+    public void posttest(View view) {
+
+        ChangeStatus change = new ChangeStatus();
+        change.setStatus_id(3);
+        HashMap<String, String> header = new HashMap<String, String>();
+        header.put("Content-type", "application/x-www-form-urlencoded");
+
+        String envois = "\"status_id\": 3";
+
+        ClassTemp classTemp = new ClassTemp();
+        classTemp.setStrange("laurent");
+
+        apiInterface = RetrofitBuilder.getRetrofitBuilder().create(MyApiEndpointInterface.class);
+
+
+        //Call<Void> call = apiInterface.changestatus("TA-1", header, change);
+        //Call<Void> call = apiInterface.changestatu(classTemp);
+        Call<Void> call = apiInterface.changestatusget("TA-1", 2);
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Log.i("test", "sucess");
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Log.i("test", "fail");
+            }
+        });
+    }
+
+    public void reinitilisationTimer(View view) {
+        progressBarTempsParole.setProgress(0);
+        progressBarTempsParole.setBackgroundColor(getResources().getColor(R.color.bleutimer));
+    }
+
+    public void changeStatus(String id, Integer status){
+
+        apiInterface = RetrofitBuilder.getRetrofitBuilder().create(MyApiEndpointInterface.class);
+        Call<Void> call = apiInterface.changestatusget(id, status);
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Log.i("test", "sucess");
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Log.i("test", "fail");
+            }
+        });
+    }
+
+    public void recuplist(){
+        final List<ImageView>imgV = new ArrayList<>();
+
+        imgV.add(picutilisateur1);
+        imgV.add(picutilisateur2);
+        imgV.add(picutilisateur3);
+        imgV.add(picutilisateur4);
+        imgV.add(picutilisateur5);
+        imgV.add(picutilisateur6);
+
+
+        apiInterface = RetrofitBuilder.getRetrofitBuilder().create(MyApiEndpointInterface.class);
+        Call<Utilisateurs> call = apiInterface.getAllUtilisateurs("TA");
+
+        call.enqueue(new Callback<Utilisateurs>() {
+            @Override
+            public void onResponse(Call<Utilisateurs> call, Response<Utilisateurs> response) {
+                utilisateurs = response.body();
+                members = utilisateurs.getListMember();
+
+                for(ListMember member : members){
+
+                    if(!member.getId().matches("(?i).*addon.*"))
+                    {
+                        if(index <6) {
+                            Log.i("membre", member.getId());
+                            imageViewtemp = imgV.get(index);
+                            imageViewtemp.setTag(member.getId());
+                            index++;
+                        }else{
+                            Toast.makeText(MainActivity.this, "Trop d'utilisateurs dans JIRA", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Utilisateurs> call, Throwable t) {
+
+            }
+        });
+    }
 }

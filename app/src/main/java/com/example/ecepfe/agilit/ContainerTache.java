@@ -14,7 +14,15 @@ public class ContainerTache {
     private String etatdelatache;
     private String tache;
     private Integer remaining;
+    private String id;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public List<String> getUtilisateurs() {
         return utilisateurs;

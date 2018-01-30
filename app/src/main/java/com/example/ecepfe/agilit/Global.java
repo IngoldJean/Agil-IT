@@ -32,5 +32,8 @@ public class Global {
 
     public static List<ContainerTache> listecontainer = new ArrayList<ContainerTache>();
 
+    public static List<ContainerTache> lcontainertemp = new ArrayList<ContainerTache>();
+    public static Integer incrementeurtempcontainer = 0;
+
 
 }

@@ -1,5 +1,7 @@
 package com.example.ecepfe.agilit;
 
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -9,19 +11,22 @@ import retrofit2.http.*;
 
 public interface MyApiEndpointInterface {
 
-    /*@GET("issue/AIS-1/issuetype")
-    Call<Example> getIssue();
-
-    @GET("issue/AIS-1/assignee")
-    Call<Example> getAssignee();
-
-    @GET("issue/AIS-1/status")
-    Call<Example> getStatus();
-
-    @GET("issue/AIS-1")
-    Call<Example> getAllData();*/
-
-    @GET("1")
+    @GET("sprint/8")
     Call<ListeTaches> getAllTache();
 
+    @GET("issue/{id}/changestatus/{status}")
+    Call<Void> changestatusget(@Path("id") String id, @Path("status") Integer statusid);
+
+    @GET("project/{projectkey}/members")
+    Call<Utilisateurs> getAllUtilisateurs(@Path("projectkey") String projectkey);
+
+
+    /*@POST("issue/{id}/changestatus")
+    Call<Void> changestatus(@Path("id") String id, @Body ChangeStatus changeStatus);*/
+
+    @POST("post")
+    Call<Void> changestatu(@Body ClassTemp classTemp);
+
+    @POST("issue/{id}/changestatus")
+    Call<Void> changestatus(@Path("id") String id, @HeaderMap Map<String,String> headers, @Body ChangeStatus changeStatus);
 }
